@@ -1,9 +1,8 @@
 package model;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudenteUniversitario extends Utente implements Serializable{
+public class StudenteUniversitario extends Utente{
 
 	/**
 	 * 
