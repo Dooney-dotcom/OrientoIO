@@ -1,0 +1,113 @@
+:root {
+    /* Palette */
+    --charcoal: #264653;
+    --dark-slate-gray: #275C62;
+    --myrtle-green: #287271;
+    --persian-green: #2A9D8F;
+    --verdigris: #62B6AB;
+    --tiffani-blue: #99CEC7;
+    --white-smoke: #F5F5F5;
+ 
+ }
+
+body {
+    color: var(--white-smoke);
+}
+
+header {
+    background-color: var(--myrtle-green);
+    color: var(--white-smoke);
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 999;
+}
+
+.logo-container {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.header-logo {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 20px;
+}
+
+.logo {
+    transition: all 0.3s ease;
+  }
+
+  .logo:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+.add-btn {
+    width: 100%;
+    background-color: var(--myrtle-green);
+    border: none;
+    transition: 0.2ms;
+}
+
+.add-btn:hover {
+    background-color: var(--dark-slate-gray) !important;
+}
+
+.card {
+    border: none;
+    transition: all 0.3s linear;
+}
+  
+.card:hover {
+    transform: scale(1.1);
+}
+  
+.card-body {
+    background-color: var(--white-smoke);
+    color: black;
+}
+  
+.go-btn {
+    width: 100%;
+    background-color: var(--charcoal);
+    transition: all 0.2s linear;
+    color: whitesmoke;
+}
+
+.del-btn {
+    width: 100%;
+    transition: all 0.2s linear;
+}
+  
+.go-btn:hover {
+    background-color: var(--dark-slate-gray) !important;
+    color: whitesmoke !important;
+}
+
+.list-group-item {
+    background-color: var(--white-smoke);
+}
+
+main {
+    background-color: var(--charcoal);
+    height: 100vh;
+}
+
+.home-title {
+    font-size: 4rem;
+}
+
+footer {
+    background-color: var(--myrtle-green);
+}
+
+.add-btn {
+    color: var(--white-smoke);
+}
+
+.modal{
+    color: #1C1C1C !important;
+}
+
+.list-group-item:hover {
+    background-color: #dfdfdf;
+    cursor: pointer;
+}
