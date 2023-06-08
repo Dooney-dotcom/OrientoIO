@@ -127,7 +127,7 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
         <div class="row justify-content-start">
             <div class="col-md-6 col-sm-12 text-start ps-3">
                 <div class="mb-3">
-                    <label for="university1" class="form-label px-2">Corso Di Laurea</label>
+                    <label for="course1" class="form-label px-2">Corso Di Laurea</label>
                     <select class="form-select form-select-lg" name="course1" id="course1" disabled>
                         <option value="" selected>Seleziona un Corso di Laurea</option>
 
@@ -137,7 +137,7 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
 
             <div class="col-md-6 col-sm-12 text-end justify-content-end pe-3">
                 <div class="mb-3">
-                    <label for="university1" class="form-label px-2">Corso Di Laurea</label>
+                    <label for="course2" class="form-label px-2">Corso Di Laurea</label>
                     <select class="form-select form-select-lg" name="course2" id="course2" disabled>
                         <option value="" selected>Seleziona un Corso di Laurea</option>
                         
@@ -150,7 +150,7 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
         <div class="row justify-content-start">
             <div class="col-md-6 col-sm-12 text-start ps-3">
                 <div class="mb-3">
-                    <label for="university1" class="form-label px-2">Piano Formativo</label>
+                    <label for="Piano1" class="form-label px-2">Piano Formativo</label>
                     <select class="form-select form-select-lg" name="Piano1" id="Piano1" disabled>
                         <option value="" selected>Seleziona un Piano Formativo</option>
                         
@@ -160,7 +160,7 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
 
             <div class="col-md-6 col-sm-12 text-end justify-content-end pe-3">
                 <div class="mb-3">
-                    <label for="university1" class="form-label px-2">Piano Formativo</label>
+                    <label for="Piano2" class="form-label px-2">Piano Formativo</label>
                     <select class="form-select form-select-lg" name="Piano2" id="Piano2" disabled>
                         <option value="" selected>Seleziona un Piano Formativo</option>
                         
@@ -175,13 +175,13 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
         <div class="row justify-content-start my-5">
             <div class="col-md-1 col-sm-12"></div>
             
-            <div class="col-md-5 col-sm-12 px-3 justify-content-end">
+            <div class="col-md-5 col-sm-12 px-3 justify-content-center text-end">
                 <ul class="list-unstyled" id="result-list-1">
                     
                 </ul>
             </div>
 
-            <div class="col-md-5 col-sm-12 px-3 justify-content-center">
+            <div class="col-md-5 col-sm-12 px-3 justify-content-center text-start">
                 <ul class="list-unstyled" id="result-list-2">
                     
                 </ul>

@@ -128,6 +128,14 @@ $("#Piano1").on({
             return;
         }
 
+        if($("#university1").val() == $("#university2").val() &&
+        $("#course1").val() == $("#course2").val() &&
+        $("#Piano1").val() == $("#Piano1").val()
+        ) {
+            alert("Scegli due piani formativi diversi per il confronto!");
+            return;
+        }
+
         $("#result-list-1").html("");
         result1.map(corso => {
             if(corso.name = name) {
@@ -154,6 +162,14 @@ $("#Piano2").on({
         let name = $(this).val();
 
         if(name =="") {
+            return;
+        }
+
+        if($("#university1").val() == $("#university2").val() &&
+        $("#course1").val() == $("#course2").val() &&
+        $("#Piano1").val() == $("#Piano1").val()
+        ) {
+            alert("Scegli due piani formativi diversi per il confronto!");
             return;
         }
 

@@ -1,4 +1,3 @@
-
 $("#esame").on({
     change: () => {
         // Ottieni il valore selezionato dall'elemento select con id "esame"
@@ -24,7 +23,7 @@ $("#esame").on({
         }
         });
     }
-}); 
+});
 
 $("#register-btn").on({
     click : () => {
@@ -32,6 +31,14 @@ $("#register-btn").on({
         let voto = $("#voto").val();
         let cfu = $("#cfu").val();
         let lode = $("#lode").is(":checked");
+
+        if(esame == "" || voto == "" || voto < 18 || cfu == "" || cfu <= 0) {
+            alert("Compilare correttamente tutti i campi prima di proseguire!");
+            return;
+        } else if(lode == true && voto < 30) {
+            alert("La lode può essere inserita solo se il voto è uguale a 30!");
+            return;
+        }
 
         $.ajax({
             url: "registraEsame", // Sostituisci con l'URL corretto del server
@@ -57,7 +64,15 @@ $("#preview-btn").on({
     click : () => {
         let voto = $("#voto-preview").val();
         let cfu = $("#cfu-preview").val();
-        let lode = $("#lode-preview").val();
+        let lode = $("#lode-preview").is(":checked");
+
+        if(voto == "" || voto < 18 || cfu == "" || cfu <= 0) {
+            alert("Compilare correttamente tutti i campi prima di proseguire!");
+            return;
+        } else if(lode == true && voto < 30) {
+            alert("La lode può essere inserita solo se il voto è uguale a 30!");
+            return;
+        }
 
         $.ajax({
             url: "proiettaVoto", // Sostituisci con l'URL corretto del server
@@ -69,7 +84,11 @@ $("#preview-btn").on({
             },
             success: function(response) {
                 console.log(response);
-                alert(response);
+
+                $("#proiezione-cfu").text(response.CFU);
+                $("#proiezione-media").text(response.media);
+                $("#proiezione-base").text(response.baseDiLaurea);
+                $("#proiezione-modal").modal("show");
             },
             error: function(xhr, status, error) {
                 // Gestisci eventuali errori
@@ -121,7 +140,15 @@ $("#save-modify-btn").on({
         let id = $("#esame-modify").val();
         let voto = $("#voto-modify").val();
         let cfu = $("#cfu-modify").val();
-        let lode = $("#lode-modify").val();
+        let lode = $("#lode-modify").is(":checked");
+
+        if(id == "" || voto == "" || voto < 18 || cfu == "" || cfu <= 0) {
+            alert("Compilare correttamente tutti i campi prima di proseguire!");
+            return;
+        } else if(lode == true && voto < 30) {
+            alert("La lode può essere inserita solo se il voto è uguale a 30!");
+            return;
+        }
 
         $.ajax({
             url: "librettoController", // Sostituisci con l'URL corretto del server

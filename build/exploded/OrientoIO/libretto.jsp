@@ -110,7 +110,7 @@ formatter.setMaximumFractionDigits(2);
                                         <div class="mb-3">
                                           <label for="voto" class="form-label">Voto</label>
                                           <input type="text"
-                                            class="form-control" name="voto" id="voto" aria-describedby="helpId" placeholder="es. 30">
+                                            class="form-control" name="voto" id="voto" aria-describedby="helpId" placeholder="es. 30" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 text-start">
@@ -128,6 +128,9 @@ formatter.setMaximumFractionDigits(2);
                                           <label class="form-check-label" for="lode">
                                             Lode
                                           </label>
+                                          <div class="error-div" id="error-div" hidden>
+                                            <p>La lode può essere impostata solo se il voto è 30!</p>
+                                          </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6"></div>
@@ -145,7 +148,7 @@ formatter.setMaximumFractionDigits(2);
                     <!-- Button Triggers Modal -->
                     <button class="btn btn-v" id="preview-modal-btn" data-bs-toggle="modal" data-bs-target="#previewModal">Proietta Voto</button>
 
-                    <!-- Modal -->
+                    <!-- Preview Modal -->
                     <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                         <div class="modal-content">
@@ -177,6 +180,9 @@ formatter.setMaximumFractionDigits(2);
                                           <label class="form-check-label" for="lode-preview">
                                             Lode
                                           </label>
+                                          <div class="error-div" id="error-div-preview" hidden>
+                                            <p>La lode può essere impostata solo se il voto è 30!</p>
+                                          </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6"></div>
@@ -189,8 +195,47 @@ formatter.setMaximumFractionDigits(2);
                         </div>
                         </div>
                     </div>
+                    <!-- Modal Proiezione  -->
+                    <div class="modal fade" id="proiezione-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Ecco la tua Proiezione</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <p>Registrando questo voto nel tuo libretto, le tue statistiche saranno le seguenti: </p> 
+                                </div>
+                              </div>
+                              <div class="row px-3">
+                                <div class="col-sm-12 col-md-4 text-center">
+                                  <h5>CFU</h5>
+                                </div>
+                                <div class="col-sm-12 col-md-4 text-center">
+                                  <h5>MEDIA</h5>
+                                </div>
+                                <div class="col-sm-12 col-md-4 text-center">
+                                  <h5>BASE DI LAUREA</h5>
+                                </div>
+                              </div>
+                              <div class="row px-3">
+                                <div class="col-sm-12 col-md-4 text-center">
+                                  <h6 id="proiezione-cfu"></h6>
+                                </div>
+                                <div class="col-sm-12 col-md-4 text-center">
+                                  <h6 id="proiezione-media"></h6>
+                                </div>
+                                <div class="col-sm-12 col-md-4 text-center">
+                                  <h6 id="proiezione-base"></h6>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
                 <div class="row main-row"> 
                     <div class="list-col col-md-7 col-sm-12 pt-4">
                     <%
@@ -271,6 +316,9 @@ formatter.setMaximumFractionDigits(2);
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" value="lode-modify" id="lode-preview">
                                   <label class="form-check-label" for="lode-modify">Lode</label>
+                                  <div class="error-div" id="error-div-modify" hidden>
+                                    <p>La lode può essere impostata solo se il voto è 30!</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-sm-6"></div>

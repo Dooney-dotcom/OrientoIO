@@ -60,7 +60,7 @@ public class Libretto {
 	}
 
 	public synchronized Proiezione proiettaVoto(int voto, int cfu2, boolean lode) {
-		this.CFU += cfu2;
+		int cfuProiezione = this.CFU + cfu2;
 		double somma = 0;
 		for(EsameSvolto ex : this.esamiSvolti) {
 			somma += ex.getVoto() * ex.getEsame().getCFU();
@@ -68,14 +68,14 @@ public class Libretto {
 		
 		somma+=voto*cfu2;
 		
-		this.media = somma / CFU;
+		double media = somma / cfuProiezione;
 		
-		this.baseDiLaurea = media * 110 / 30;
+		double baseDiLaurea = media * 110 / 30;
 		
 		Proiezione proiezione = new Proiezione();
 		proiezione.setMedia(media);
 		proiezione.setBaseDiLaurea(baseDiLaurea);
-		proiezione.setCFU(CFU);
+		proiezione.setCFU(cfuProiezione);
 		
 		return proiezione;
 	}
