@@ -32,12 +32,12 @@ public class DatabaseMock {
 		Universita u = new Universita();
 		u.setCitta(c);
 		u.setNome("Università degli studi di Bologna");
-		universita.put("Bologna", u);
+		universita.put(u.getNome(), u);
 		
 		Universita u2 = new Universita();
 		u2.setCitta(c);
 		u2.setNome("Politecnico di Milano");
-		universita.put("Milano", u2);
+		universita.put(u2.getNome(), u2);
 		
 		CorsoDiLaurea cdl = new CorsoDiLaurea();
 		cdl.setNome("Ingegneria Informatica T");
@@ -51,6 +51,7 @@ public class DatabaseMock {
 		cdl.setUniversita(u);
 		
 		corsi.add(cdl);
+		u.getCorsiDiLaurea().add(cdl);
 		
 		CorsoDiLaurea cdl2 = new CorsoDiLaurea();
 		cdl2.setNome("Giurisprudenza");
@@ -64,6 +65,7 @@ public class DatabaseMock {
 		cdl2.setUniversita(u);
 		
 		corsi.add(cdl2);
+		u.getCorsiDiLaurea().add(cdl2);
 		
 		PianoFormativo pianoFormativo = new PianoFormativo();
 		pianoFormativo.setCorso(cdl);

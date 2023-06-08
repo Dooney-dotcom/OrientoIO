@@ -113,7 +113,7 @@ if(ruolo.equals("amministratore")) {
                                   <p class="card-text text-center"><%= cc.getUniversita().getNome() %></p>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                  <li class="list-group-item"><b>Tipo:</b> <%= cc.getTipo() %></li>
+                                  <li class="list-group-item"><b>Tipo:</b> <%= cc.getTipo().toString().replaceAll("_", " ") %></li>
                                   <li class="list-group-item"><b>Sede:</b> <%= cc.getUniversita().getCitta().getNomeCitta() %></li>
                                   <li class="list-group-item"><b>Lingua:</b> <%= cc.getLingua() %></li>
                                   <li class="list-group-item"><b>Accesso:</b> <%= cc.getAccesso()%></li>
@@ -290,24 +290,7 @@ if(ruolo.equals("amministratore")) {
   </main>
   <footer>
     <div class="container-fluid">
-        <div class="row pt-2 ps-5">
-            <div class="col-sm-12 col-md-4 ps-5 mt-2">
-                <img src="./resources/logo-footer.png" alt="OrientoIO" width="50%">
-            </div>
-            <div class="col-sm-12 col-md-4 mt-3 pt-3">
-                <h5>Link utili</h5>
-                <ul class="list-unstyled">
-                    <li>Contatti</li>
-                    <li>Chi siamo</li>
-                    <li>Privacy e Policy</li>
-                    <li>Cookies</li>
-                </ul>
-            </div>
-            <div class="col-sm-12 col-md-4 text-center">
-            </div>
-        </div>
-        <hr>
-        <div class="row">
+        <div class="row py-2">
             <div class="col-sm-12 text-center">
                 <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
             </div>

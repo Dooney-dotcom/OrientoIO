@@ -12,7 +12,6 @@ public class Utente implements Serializable{
 
 	private ListaPreferiti listaPreferiti;
 	
-	private int id;
 	private String nome;
 	private String cognome;
 	private LocalDate dataDiNascita;
@@ -66,14 +65,6 @@ public class Utente implements Serializable{
 	public String toString() {
 		return "Utente [nome=" + nome + ", cognome=" + cognome + ", dataDiNascita=" + dataDiNascita + ", username="
 				+ username + "]";
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 }

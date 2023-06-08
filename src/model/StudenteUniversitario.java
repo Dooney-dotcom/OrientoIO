@@ -9,7 +9,6 @@ public class StudenteUniversitario extends Utente{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
 	private PianoFormativo pianoFormativo;
 	private List<RecensioneEsame> recensioniEsami;
 	private RecensioneCorso recensioneCorso;
@@ -24,17 +23,6 @@ public class StudenteUniversitario extends Utente{
 		this.recensioniEsami = new ArrayList<RecensioneEsame>();
 		
 	}
-
-	
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 
 	public PianoFormativo getPianoFormativo() {
 		return pianoFormativo;
