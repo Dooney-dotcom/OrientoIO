@@ -10,9 +10,22 @@
  
  }
 
-body {
-    color: var(--white-smoke);
-}
+ html,
+ body {
+     height: 100%;
+     margin: 0;
+     padding: 0;
+ }
+ 
+ main {
+     background-color: var(--charcoal);
+     color: var(--white-smoke);
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+ }
+ 
+ 
 
 header {
     background-color: var(--myrtle-green);
@@ -84,11 +97,6 @@ header {
 
 .list-group-item {
     background-color: var(--white-smoke);
-}
-
-main {
-    background-color: var(--charcoal);
-    height: 100vh;
 }
 
 .home-title {

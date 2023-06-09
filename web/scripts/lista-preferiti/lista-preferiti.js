@@ -19,7 +19,7 @@ $("#add-btn").on({
                 $("#search-results").append("<ul id='result-list' class='list-group'></ul>");
                 response.map(course => {
                     let info = course.split("____");
-                    $("#result-list").append("<li class='list-group-item' data-course='" + course + "'>" + info[0] + "&nbsp;-&nbsp;" + info[1] + "<br>" + info[2].replace("_", " ") + "</li>");
+                    $("#result-list").append("<li class='list-group-item' data-course='" + course + "'>" + info[0] + "&nbsp;-&nbsp;" + info[1] + "<br>" + info[2].replaceAll("_", " ") + "</li>");
                 })
 
                 $("#search-results").on("click", ".list-group-item", function() {
@@ -68,7 +68,6 @@ $(".del-btn").on({
             },
             contentType: "application/json; charset=utf-8",
             success: function(response) {
-                alert(response);
                 location.reload();
             },
             error: function(xhr, status, error) {

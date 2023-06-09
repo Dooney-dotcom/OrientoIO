@@ -32,7 +32,8 @@ $("#register-btn").on({
         let cfu = $("#cfu").val();
         let lode = $("#lode").is(":checked");
 
-        if(esame == "" || voto == "" || voto < 18 || cfu == "" || cfu <= 0) {
+        if(esame < 0 || voto == "" || voto < 18 || voto > 30
+         || cfu == "" || cfu <= 0) {
             alert("Compilare correttamente tutti i campi prima di proseguire!");
             return;
         } else if(lode == true && voto < 30) {
@@ -66,7 +67,7 @@ $("#preview-btn").on({
         let cfu = $("#cfu-preview").val();
         let lode = $("#lode-preview").is(":checked");
 
-        if(voto == "" || voto < 18 || cfu == "" || cfu <= 0) {
+        if(voto == "" || voto < 18 || voto > 30 || cfu == "" || cfu <= 0) {
             alert("Compilare correttamente tutti i campi prima di proseguire!");
             return;
         } else if(lode == true && voto < 30) {
@@ -86,8 +87,8 @@ $("#preview-btn").on({
                 console.log(response);
 
                 $("#proiezione-cfu").text(response.CFU);
-                $("#proiezione-media").text(response.media);
-                $("#proiezione-base").text(response.baseDiLaurea);
+                $("#proiezione-media").text(response.media.toFixed(2));
+                $("#proiezione-base").text(response.baseDiLaurea.toFixed(2));
                 $("#proiezione-modal").modal("show");
             },
             error: function(xhr, status, error) {
@@ -142,7 +143,7 @@ $("#save-modify-btn").on({
         let cfu = $("#cfu-modify").val();
         let lode = $("#lode-modify").is(":checked");
 
-        if(id == "" || voto == "" || voto < 18 || cfu == "" || cfu <= 0) {
+        if(id == "" || voto == "" || voto < 18 || voto > 30 || cfu == "" || cfu <= 0) {
             alert("Compilare correttamente tutti i campi prima di proseguire!");
             return;
         } else if(lode == true && voto < 30) {

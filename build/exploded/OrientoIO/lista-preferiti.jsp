@@ -78,7 +78,7 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
     <main>
         <div class="container-fluid">
             <!-- Page Title -->
-            <div class="row pt-3">
+            <div class="row">
                 <div class="col-sm-12 text-center">
                     <h4>Ecco la tua Lista dei Corsi Preferiti</h4>
                     <h5>Qui potrai visualizzare i vari Corsi da te inseriti oppure modificare tale lista.</h5>
@@ -86,29 +86,29 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
             </div>
 
             <!-- Barra per aggiungere un corso ai preferiti -->
-            <div class="row pt-3 pb-3 pe-0 me-0">
-                <div class="col-sm-9 ps-4">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-9 py-3">
                     <input type="text" class="form-control text-input" name="corso" id="search-corso" aria-describedby="helpId" placeholder="Cerca un Corso">
                 </div>
-                <div class="col-sm-3 pe-4">
+                <div class="col-sm-12 col-md-3 py-3 justify-content-center">
                     <button type="button" class="btn add-btn" id="add-btn">Cerca</button>
                 </div>
             </div>
-            <div id="search-results">
+            <div class="container my-2" id="search-results">
 
             </div>
 
             <!-- Corsi Preferiti -->
-            <div class="row pt-3 ps-4">
+            <div class="row">
                 <%for(CorsoDiLaurea c : list) { %>
-                    <div class="col-sm-12 col-md-3">
+                    <div class="col-sm-12 col-md-3 py-3 d-flex justify-content-center align-items-center">
                         <div class="card shadow" style="width: 18rem;">
                             <div class="card-body rounded">
                               <h5 class="card-title text-center"><%= c.getNome() %></h5>
                               <p class="card-text text-center"><%= c.getUniversita().getNome() %></p>
                               <hr>
                               <ul class="list-group list-group-flush">
-                                <li class="list-group-item text-center"><%= c.getTipo() %></li>
+                                <li class="list-group-item text-center"><%= c.getTipo().toString().replaceAll("_", " ") %></li>
                               </ul>
                               <hr>
                              <button data-bs-toggle="modal" data-bs-target="#<%=c.toString().replaceAll(" ", "_").replaceAll(".", "_")%>" class="btn go-btn">Scopri di più</button>
@@ -140,7 +140,7 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
                                     <div class="row mb-3">
                                         <div class="col-md-4">
                                             <h5>Tipo</h5>
-                                            <%= c.getTipo() %>
+                                            <%= c.getTipo().toString().replaceAll("_", " ")%>
                                         </div>
                                         <div class="col-md-4">
                                             <h5>Accesso</h5>

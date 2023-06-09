@@ -76,6 +76,16 @@
         <servlet-name>Confronto</servlet-name>
         <url-pattern>/confronto</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RecensioneEsameServlet</servlet-name>
+        <servlet-class>servlets.RecensioneEsameServlet</servlet-class>
+       
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RecensioneEsameServlet</servlet-name>
+        <url-pattern>/recensioneEsame</url-pattern>
+    </servlet-mapping>
     
 	<!-- Welcome pages -->
 	<!-- pleonastico: tomcat "tenta" in automatico le index.html e index.jsp -->
