@@ -25,8 +25,4 @@ public class Restrizione {
     public void setTipoRestrizione(TipoRestrizione tipoRestrizione){
         this.tipoRestrizione=tipoRestrizione;
     }
-
-
-
-
 }

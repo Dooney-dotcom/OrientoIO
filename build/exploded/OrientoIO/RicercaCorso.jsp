@@ -11,7 +11,7 @@ if(application.getAttribute("db") == null){
 
 DatabaseMock db = (DatabaseMock) application.getAttribute("db");
 
-//questi righi vanno eliminati perchè servono solo per il controllo della jsp
+//questi righi vanno eliminati perchï¿½ servono solo per il controllo della jsp
 Utente u = db.getUtenti().get("LucaB"); 
 session.setAttribute("user", u); 
 session.setAttribute("ruolo", "utente");
@@ -40,7 +40,7 @@ if(ruolo.equals("amministratore")) {
 		List<CorsoDiLaurea> corsi = db.getCorsi();
 		
 		for(CorsoDiLaurea c : corsi){
-			if(c.getNome().equals(corsoRicercato))
+			if(c.getNome().toLowerCase().contains(corsoRicercato.toLowerCase()))
 				corsiRicercati.add(c);
 		}
 		//System.out.println(corsiRicercati);
@@ -66,8 +66,8 @@ if(ruolo.equals("amministratore")) {
 
     <link rel="stylesheet" href="./styles/ricercaCorso.css">
     
-    <script src="./scripts/jquery-1.12.3.min.js"></script>
-    <script type="text/javascript" src="./scripts/ricercaCorso.js"></script>
+    <script src="./scripts/libs/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="./scripts/ricercaCorso.js" defer></script>
 </head>
 <body>
 <header>
@@ -143,7 +143,7 @@ if(ruolo.equals("amministratore")) {
                   <h3><%= cc.getUniversita().getNome() %></h3>
                 </div>
                 <div class="col-sm-4 d-flex justify-content-end align-items-center pe-4">
-                  <button type="button" class="btn btn-success" id="aggiungiPreferito">Aggiungi ai Preferiti</button>
+                  <button type="button" value="<%=cc.getUniversita().getNome() + "____" + cc.getNome()  %>" class="btn btn-success add-to-favorite-button" id="aggiungiPreferito">Aggiungi ai Preferiti</button>
                 </div>
               </div>
                 <hr>
@@ -443,10 +443,10 @@ if(ruolo.equals("amministratore")) {
                                           Testo recensione
                                       </div>
                                       <div class="col-md-1 text-start">
-                                          Qualità dell'insegnamento
+                                          Qualitï¿½ dell'insegnamento
                                       </div>
                                       <div class="col-md-2 text-start">
-                                          Opportunità offerte
+                                          Opportunitï¿½ offerte
                                       </div>
                                       <div class="col-md-2 text-start">
                                           Sbocchi lavorativi
@@ -506,7 +506,7 @@ if(ruolo.equals("amministratore")) {
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

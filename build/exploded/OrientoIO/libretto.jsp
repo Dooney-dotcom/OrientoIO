@@ -11,17 +11,48 @@
     pageEncoding="UTF-8"%>
 
 <% 
+// 1) Caricamento del Database se non è stato caricato
 if(application.getAttribute("db") == null) {
 	DatabaseMock db = new DatabaseMock();
 	application.setAttribute("db", db);
 }
 
+// 2) Prendere il Database
 DatabaseMock db = (DatabaseMock)application.getAttribute("db");
 
-if(session.getAttribute("user") == null) {
-		response.sendRedirect("login");
+// 3) Se non si è fatto il login si torna alla pagina di login
+// Attributo user contiene utente oppure studente universitario in base a "ruolo"
+// Attributo username contiene l'username
+// Questi tre attributi vanno impostati in fase di login
+
+if(session.getAttribute("user") == null || session.getAttribute("ruolo") == null || session.getAttribute("username") == null) {
+	response.sendRedirect("login.jsp");
 }
 
+// 4) Check che l'user abbia i permessi per accedere alla pagina
+// Per pagine accessibili da Utente check che non sia amministratore
+// Per pagine accessibili a StudenteUniversitario check che sia "studente"
+String ruolo = (String) session.getAttribute("ruolo");
+String username = (String) session.getAttribute("username");
+
+// Questa pagina è accessibile solo a studenti
+if(!ruolo.equals("studente")) {
+	response.sendRedirect("HomeAmministratore.jsp");
+}
+
+// 5) Check che lo studente non sia bannato
+if(ruolo.equals("studente") && 
+		((StudenteUniversitario) session.getAttribute("user"))
+		.getRestrizione() != null &&
+		((StudenteUniversitario) session.getAttribute("user"))
+		.getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)){ 
+	response.sendRedirect("./login.jsp");
+}
+
+// 6) Per pagine recensione check che lo studente non sia bloccato in scrittura
+
+
+// 7) Prendere lo studente/utente dalla sessione e iniziare a lavorare
 StudenteUniversitario s = (StudenteUniversitario) session.getAttribute("user");
 Libretto libretto = s.getLibretto();
 int CFU_tot = s.getPianoFormativo().getCorso().getTipo() == TipoCorso.TRIENNALE ? 180 : s.getPianoFormativo().getCorso().getTipo() == TipoCorso.MAGISTRALE ? 120 : 300;
