@@ -3,7 +3,8 @@ package model;
 public class RecensioneCorso {
 	
 	private StudenteUniversitario studente;
-
+	private CorsoDiLaurea cdl;
+	
 	
 	private String testoRecensione;
 	private Integer qualitaInsegnamento;
@@ -23,6 +24,7 @@ public class RecensioneCorso {
 	public void setStudente(StudenteUniversitario studente) {
 		this.studente = studente;
 	}
+	
 	
 	
 	
@@ -49,6 +51,16 @@ public class RecensioneCorso {
 	}
 	public void setOpportunitaOfferte(String opportunitaOfferte) {
 		this.opportunitaOfferte = opportunitaOfferte;
+	}
+
+
+	public CorsoDiLaurea getCorso() {
+		return cdl;
+	}
+
+
+	public void setCorso(CorsoDiLaurea cdl) {
+		this.cdl = cdl;
 	}
 	
 }

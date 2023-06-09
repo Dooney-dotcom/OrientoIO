@@ -38,14 +38,16 @@ public class ServletRegistrazione extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/registrazione.html").forward(request, response);
 		}else {
 			DatabaseMock db = (DatabaseMock) this.getServletContext().getAttribute("db");
-			Map<String, String> accounts = db.getAccounts();
+			Map<String, Account> accounts = db.getAccounts();
 			Map<String, StudenteUniversitario> studenti = db.getStudenti();
 			Map<String, Utente> utenti = db.getUtenti();
 			
 			if(accounts.containsKey(username)) {
 				this.getServletContext().getRequestDispatcher("/registrazione.html").forward(request, response);
 			}else {
-				accounts.put(username, password);
+				Account account = new Account();
+				account.setPassword(password);
+				accounts.put(username, account);
 				
 				String citta = request.getParameter("cit");
 				String uni = request.getParameter("uni");

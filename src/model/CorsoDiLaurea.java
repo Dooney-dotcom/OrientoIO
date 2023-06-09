@@ -8,6 +8,7 @@ public class CorsoDiLaurea {
 	private List<PianoFormativo> pianiFormativi;
 	private Universita universita;
 	private TipoCorso tipo;
+	private List<RecensioneCorso> recensioni;
 	
 	private String nome;
 	private String coordinatore;
@@ -21,6 +22,7 @@ public class CorsoDiLaurea {
 
 	public CorsoDiLaurea() {
 		this.pianiFormativi = new ArrayList<>();
+		this.recensioni = new ArrayList<>();
 	}
 
 
@@ -94,6 +96,18 @@ public class CorsoDiLaurea {
 	//metodi
 	public void aggiungiPianoFormativo(PianoFormativo pianoFormativo) {
 		this.pianiFormativi.add(pianoFormativo);
+	}
+
+
+
+	public List<RecensioneCorso> getRecensioni() {
+		return recensioni;
+	}
+
+
+
+	public void setRecensioni(List<RecensioneCorso> recensioni) {
+		this.recensioni = recensioni;
 	}
 	
 }

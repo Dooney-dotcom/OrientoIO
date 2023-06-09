@@ -1,14 +1,22 @@
 <%@page import="model.*"%>
 <%@page import="java.util.*"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <% 
-if(application.getAttribute("db") == null) {
+if(application.getAttribute("db") == null){
 	DatabaseMock db = new DatabaseMock();
 	application.setAttribute("db", db);
 }
 
-DatabaseMock db = (DatabaseMock)application.getAttribute("db");
+DatabaseMock db = (DatabaseMock) application.getAttribute("db");
+
+//questi righi vanno eliminati perchè servono solo per il controllo della jsp
+Utente u = db.getUtenti().get("LucaB"); 
+session.setAttribute("user", u); 
+session.setAttribute("ruolo", "utente");
+session.setAttribute("username", "LucaB");
+//
 
 if(session.getAttribute("user") == null || session.getAttribute("ruolo") == null || session.getAttribute("username") == null) {
 	response.sendRedirect("login.jsp");
@@ -19,13 +27,9 @@ String username = (String) session.getAttribute("username");
 
 if(ruolo.equals("amministratore")) {
 	response.sendRedirect("HomeAmministratore.jsp");
-} else if(ruolo.equals("studente") && 
-		((StudenteUniversitario) session.getAttribute("user"))
-		.getRestrizione() != null &&
-		((StudenteUniversitario) session.getAttribute("user"))
-		.getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)){ 
+} else if(ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)){ 
 	response.sendRedirect("./login.jsp");
-} else{
+}else{
 
 	Utente utente = (Utente) session.getAttribute("user");
 	
@@ -39,19 +43,12 @@ if(ruolo.equals("amministratore")) {
 			if(c.getNome().equals(corsoRicercato))
 				corsiRicercati.add(c);
 		}
-		System.out.println(corsiRicercati);
+		//System.out.println(corsiRicercati);
 		
 	}
+		
 	
-	if(request.getParameter("recensioni")!= null){
-		String corsoRicercato = (String) request.getParameter("recensioni");
-		
-		response.sendRedirect("recensioniCorso.jsp");
-		
-		//come far andare direttamente alle recensioni di questo corso?
-		
-	}
-	
+	//ricordati di implementare il bottone per l'aggiunta del corso a preferiti
 %>
 <html>
 <head>
@@ -113,7 +110,7 @@ if(ruolo.equals("amministratore")) {
                                   <p class="card-text text-center"><%= cc.getUniversita().getNome() %></p>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                  <li class="list-group-item"><b>Tipo:</b> <%= cc.getTipo().toString().replaceAll("_", " ") %></li>
+                                  <li class="list-group-item"><b>Tipo:</b> <%= cc.getTipo() %></li>
                                   <li class="list-group-item"><b>Sede:</b> <%= cc.getUniversita().getCitta().getNomeCitta() %></li>
                                   <li class="list-group-item"><b>Lingua:</b> <%= cc.getLingua() %></li>
                                   <li class="list-group-item"><b>Accesso:</b> <%= cc.getAccesso()%></li>
@@ -194,22 +191,24 @@ if(ruolo.equals("amministratore")) {
                         <h6>Esplora il Piano Didattico del Corso!</h6>
                         
                         <!-- for per ogni piano formativo -->
-                        <%for(PianoFormativo f : cc.getPianiFormativi()){ %>
-                        <div class="accordion" id="<%=f.getAnnoImmatricolazione().replace(" ", "_")%>">
+                        <%for(PianoFormativo f: cc.getPianiFormativi()){ %>
+                        <div class="accordion" id="<%= f.getAnnoImmatricolazione().replace("/", "_") %>">
                           <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
-                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<%=f.getAnnoImmatricolazione().replace(" ", "_")%>" aria-expanded="true" aria-controls="collapseOne">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<%= f.getAnnoImmatricolazione().replace("/", "_") %>" aria-expanded="true" aria-controls="collapseOne">
                                 Piano Formativo per Studenti Immatricolati nell'A.A. <%= f.getAnnoImmatricolazione() %>
                               </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#<%=f.getAnnoImmatricolazione().replace(" ", "_")%>">
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#<%= f.getAnnoImmatricolazione().replace("/", "_") %>">
                               <div class="accordion-body">
                                 <div class="container">
+                                
                                   <div class="row pt-2">
                                       <!--  <div class="col-sm-12 text-start">
                                           <h5>Primo Anno</h5>
                                       </div>-->
                                   </div>
+                                  
                                   <div class="row mb-2 ms-2 me-2 mt-2" style="border-bottom-width: 0.5px; border-bottom-style: solid;">
                                       <div class="col-sm-4 ps-3 text-start">
                                           Nome Esame
@@ -228,7 +227,7 @@ if(ruolo.equals("amministratore")) {
                                       </div>
                                   </div>
                                   
-                                  <!-- for per ogmi esame -->
+                                  <!-- for per ogni esame -->
                                   <%for(Esame e : f.getEsami()){ %>
                                   <div class="row pb-2 pt-2 exam-row d-flex align-items-center">
                                       <div class="col-sm-4 ps-3 text-start">
@@ -244,18 +243,20 @@ if(ruolo.equals("amministratore")) {
                                           <%= e.getCFU() %>
                                       </div>
                                       <div class="col-sm-2 text-center">
-                                          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Scheda Esame</button>
-                                          <!-- bisogna colegare questo alla view dell'esame -->
+                                          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#<%= cc.getNome().replace(" ", "_")%>_<%= cc.getUniversita().getNome().replace(" ", "_") %>_<%=f.getAnnoImmatricolazione().replace("/", "_")%>_<%=e.getNome().replace(" ", "_")%>">Scheda Esame</button>
+                                          <!-- bisogna collegare questo alla view dell'esame -->
                                       </div>
                                   </div>
-                                 <%} %> <!-- fine for esami -->
                                   
+                                  <%} %> <!-- fine for per ogni esame -->
                                   
                                 </div>
                               </div>
                             </div>
                           </div>
                           </div>
+                          
+                          
                           <%} %> <!-- fine for piano formativo -->
                         
 
@@ -265,7 +266,7 @@ if(ruolo.equals("amministratore")) {
                 <div class="row">
                     <div class="col-sm-12 pt-2 pb-2">
                         <h6>Per maggiori informazioni esplora il sito ufficiale del Corso</h6>
-                        <a href="#"><%= cc.getLinkCorso() %></a>
+                        <a href="<%= cc.getLinkCorso() %>"><%= cc.getLinkCorso() %></a>
                     </div>
                 </div>
                 <hr class="mt-3">
@@ -276,27 +277,240 @@ if(ruolo.equals("amministratore")) {
                 </div>
                 <div class="row mt-2">
                   <div class="col-sm-12 pt-2 pb-2 d-flex align-items-center justify-content-center">
-                  	<form>
-                  	<input type="text" hidden name="recensioni" value="<%= cc.getNome().replace(" ", "_")%>_<%= cc.getUniversita().getNome().replace(" ", "_") %>">
-                  	<button type="submit" class="btn btn-success" >Leggi le Recensioni sul Corso</button>
-                  	</form>
+                  	<div class="card-body">
+                  		<button class="btn explore-btn" data-bs-toggle="modal" data-bs-target="#recensioni_<%= cc.getNome().replace(" ", "_")%>_<%= cc.getUniversita().getNome().replace(" ", "_") %>">Leggi le Recensioni sul Corso</button>
+                    </div>
                   </div>
                 </div>
+                
+                
+
             </div>
           </div>
         </div>
       </div>
+      
+      
+      <% for(PianoFormativo f: cc.getPianiFormativi()){
+                          for(Esame e : f.getEsami()){ %>
+                          <!-- view lettura scheda esame -->
+					                <div class="modal modal-xl fade" id="<%= cc.getNome().replace(" ", "_")%>_<%= cc.getUniversita().getNome().replace(" ", "_") %>_<%=f.getAnnoImmatricolazione().replace("/", "_")%>_<%=e.getNome().replace(" ", "_")%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  					<div class="modal-dialog">
+					    					<div class="modal-content">
+					      						<div class="modal-header">
+					        						<h5 class="modal-title" id="staticBackdropLabel">Ecco tutte le informazioni per l'esame  <%=e.getNome() %></h5>
+					        						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      						</div>
+					      						
+					      						<div class="modal-body">
+					        					
+					        						<div class="row mb-2 ms-2 me-2 mt-2">
+					                                      <div class="col-md-3 text-start">
+					                                          <strong>SSD:</strong> <%=e.getSSO() %>
+					                                      </div>
+					                                      <div class="col-md-3 text-start">
+					                                          <strong>CFU:</strong> <%=e.getCFU() %>
+					                                      </div>
+					                                      <div class="col-md-3 text-start">
+					                                          <strong>Periodo:</strong> <%=e.getPeriodo() %>
+					                                      </div>
+					                                      <div class="col-md-3 text-start">
+					                                          <strong>Anno:</strong> <%=e.getAnno() %>
+					                                      </div>
+					                                 </div>
+					                                  
+					                                  <hr>
+											                <div class="row">
+											                    <div class="col-sm-12 pt-2 pb-2">
+											                        <h6>Per maggiori informazioni esplora il sito ufficiale di questo esame</h6>
+											                        <a href="<%= e.getLinkEsame() %>"><%= e.getLinkEsame() %></a>
+											                    </div>
+											                </div>
+											                <hr class="mt-3">
+											                <div class="row mt-3">
+											                  <div class="col-sm-12 pt-2 pb-2 d-flex align-items-center justify-content-center">
+											                    <h6>Vuoi sapere cosa pensano gli studenti di questo Esame?</h6>
+											                  </div>
+											                </div>
+											                <div class="row mt-2">
+											                  <div class="col-sm-12 pt-2 pb-2 d-flex align-items-center justify-content-center">
+											                  	<div class="col-sm-2 text-center">
+					                                          		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recensioni_<%= cc.getNome().replace(" ", "_")%>_<%= cc.getUniversita().getNome().replace(" ", "_") %>_<%=f.getAnnoImmatricolazione().replace("/", "_")%>_<%=e.getNome().replace(" ", "_")%>">Leggi le recensioni degli Studenti per questo esame</button>
+					                                      		</div>
+											                  </div>
+											                </div>
+					                           
+					      						</div>
+					      					
+					    					</div>
+					  					</div>
+									</div> 
+									
+									<!-- view lettura recensioni dell'esame -->
+									<div class="modal modal-xl fade" id="recensioni_<%= cc.getNome().replace(" ", "_")%>_<%= cc.getUniversita().getNome().replace(" ", "_") %>_<%=f.getAnnoImmatricolazione().replace("/", "_")%>_<%=e.getNome().replace(" ", "_")%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  					<div class="modal-dialog">
+					    					<div class="modal-content">
+					      						<div class="modal-header">
+					        						<h5 class="modal-title" id="staticBackdropLabel">Ecco le recensioni che gli studenti hanno dato per <%=e.getNome() %></h5>
+					        						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      						</div>
+					      						
+					      						<div class="modal-body">
+					        					
+					        						<div class="row mb-2 ms-2 me-2 mt-2" style="border-bottom-width: 0.5px; border-bottom-style: solid;">
+					                                      <div class="col-md-3 text-start">
+					                                          Testo recensione
+					                                      </div>
+					                                      <div class="col-md-1 text-start">
+					                                          Voto preso
+					                                      </div>
+					                                      <div class="col-md-2 text-start">
+					                                          Tempo di Studio <br> (in ore)
+					                                      </div>
+					                                      <div class="col-md-2 text-start">
+					                                          Valutazione del Professore 
+					                                      </div>
+					                                      <div class="col-md-2 text-start">
+					                                          Studente
+					                                      </div>
+					                                 </div>
+					                                 <hr>
+					                                  
+					                            <!-- for per ogni recensione del corso trovata -->
+					                            <%for(RecensioneEsame re: e.getRecensioni()){ 
+					                            	if( re.getEsame().getNome().equals(e.getNome()) && re.getEsame().getLinkEsame().equals(e.getLinkEsame())){
+					                            
+					                            %>
+					        						<div class="row pb-2 pt-2 exam-row d-flex align-items-center">
+					                                      <div class="col-md-3 text-start">
+					                                          <%= re.getTestoRecensione() %>
+					                                      </div>
+					                                      <div class="col-md-1 text-start">
+					                                          <%= re.getVoto() + (re.getLode()? "L" : "") %>
+					                                      </div>
+					                                      <div class="col-md-2 text-start">
+					                                          <%= re.getTempoDiStudio().toHours() %>
+					                                      </div>
+					                                      <div class="col-md-2 text-start">
+					                                          <%= re.getValutazioneProfessore() %> /5
+					                                      </div>
+					                                      <div class="col-md-2 text-start">
+					                                          <%= re.getStudente().getUsername() %>
+					                                      </div>
+					                                      
+					                                      <div class="col-md-2 text-start">
+					                                      	<form action="SegnalaRecensioneEsame.jsp" method="POST">
+					                                      		<input type="text" name="nomeEsame" value="<%= e.getNome()%>" hidden>
+					                                      		<input type="text" name="link" value="<%= e.getLinkEsame()%>" hidden>
+					                                      		<input type="text" name="usernameStudente" value="<%= re.getStudente().getUsername()%>" hidden>
+					                                      		<button type="submit" class="btn btn-success">Segnala recensione</button>
+					                                      	</form> 
+					                                      </div>
+					                                      
+					                                  </div>
+					                                  <hr>
+					        					
+					        					<%} 
+					        					}%>
+					      						</div>
+					      					
+					    					</div>
+					  					</div>
+									</div> 
+									
+									
+									
+									
+		<%} }%> <!-- fine doppio for -->
+      
+      
+      
+      
+      
+      <!-- view lettura recensioni corso -->
+                <div class="modal modal-xl fade" id="recensioni_<%= cc.getNome().replace(" ", "_")%>_<%= cc.getUniversita().getNome().replace(" ", "_") %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  					<div class="modal-dialog">
+    					<div class="modal-content">
+      						<div class="modal-header">
+        						<h5 class="modal-title" id="staticBackdropLabel">Ecco le recensioni che gli studenti hanno dato per <%=cc.getNome() %></h5>
+        						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      						</div>
+      						
+      						<div class="modal-body">
+        					
+        						<div class="row mb-2 ms-2 me-2 mt-2" style="border-bottom-width: 0.5px; border-bottom-style: solid;">
+                                      <div class="col-md-3 text-start">
+                                          Testo recensione
+                                      </div>
+                                      <div class="col-md-1 text-start">
+                                          Qualità dell'insegnamento
+                                      </div>
+                                      <div class="col-md-2 text-start">
+                                          Opportunità offerte
+                                      </div>
+                                      <div class="col-md-2 text-start">
+                                          Sbocchi lavorativi
+                                      </div>
+                                      <div class="col-md-2 text-start">
+                                          Studente
+                                      </div>
+                                 </div>
+                                 <hr>
+                                  
+                            <!-- for per ogni recensione del corso trovata -->
+                            <%for(RecensioneCorso rv: cc.getRecensioni()){ 
+                            	if(rv.getCorso().getNome().equals(cc.getNome()) && rv.getCorso().getUniversita().getNome().equals(cc.getUniversita().getNome())){
+                            
+                            %>
+        						<div class="row pb-2 pt-2 exam-row d-flex align-items-center">
+                                      <div class="col-md-3 text-start">
+                                          <%= rv.getTestoRecensione() %>
+                                      </div>
+                                      <div class="col-md-1 text-start">
+                                          <%= rv.getQualitaInsegnamento() %> /5
+                                      </div>
+                                      <div class="col-md-2 text-start">
+                                          <%= rv.getOpportunitaOfferte() %>
+                                      </div>
+                                      <div class="col-md-2 text-start">
+                                          <%= rv.getSbocchiLavorativi() %>
+                                      </div>
+                                      <div class="col-md-2 text-start">
+                                          <%= rv.getStudente().getUsername() %>
+                                      </div>
+                                      
+                                      <div class="col-md-2 text-start">
+                                      	<form action="SegnalaRecensioneCorso.jsp" method="POST">
+                                      		<input type="text" name="nomeCorso" value="<%= cc.getNome()%>" hidden>
+                                      		<input type="text" name="nomeUniversita" value="<%= cc.getUniversita().getNome()%>" hidden>
+                                      		<input type="text" name="usernameStudente" value="<%= rv.getStudente().getUsername()%>" hidden>
+                                      		<button type="submit" class="btn btn-success">Segnala recensione</button>
+                                      	</form> 
+                                      </div>
+                                      
+                                  </div>
+                                  <hr>
+        					
+        					<%} 
+        					}%>
+      						</div>
+      					
+    					</div>
+  					</div>
+				</div> 
+
+				
      <%} %> <!-- fine for corsi -->
   </main>
   <footer>
-    <div class="container-fluid">
-        <div class="row py-2">
-            <div class="col-sm-12 text-center">
-                <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+        <div class="container-fluid">
+            <div class="row py-2">
+                <div class="col-sm-12 text-center">
+                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                </div>
             </div>
         </div>
-    </div>
-  </footer>
+    </footer>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">

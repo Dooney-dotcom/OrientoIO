@@ -30,7 +30,7 @@ private static final long serialVersionUID = 1L;
 			this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 		}else {
 			DatabaseMock db = (DatabaseMock) this.getServletContext().getAttribute("db");
-			Map<String, String> accounts = db.getAccounts();
+			Map<String, Account> accounts = db.getAccounts();
 			Map<String, StudenteUniversitario> studenti = db.getStudenti();
 			Map<String, Utente> utenti = db.getUtenti();
 			
@@ -40,7 +40,7 @@ private static final long serialVersionUID = 1L;
 				this.getServletContext().getRequestDispatcher("/gestione-utenti.jsp").forward(request, response);
 			}else {
 				if(accounts.containsKey(username)) {
-					if(accounts.get(username).equals(password)) {
+					if(accounts.get(username).getPassword().equals(password)) {
 						//Caso Studente
 						if(studenti.containsKey(username)) {
 							this.getServletContext().setAttribute("stud", studenti.get(username));
