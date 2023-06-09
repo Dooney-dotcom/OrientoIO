@@ -86,12 +86,38 @@
         <servlet-name>RecensioneEsameServlet</servlet-name>
         <url-pattern>/recensioneEsame</url-pattern>
     </servlet-mapping>
+
+    <!-- Servlet per l'Autenticazione - ALESSANDRO -->
+    <servlet>
+    	<servlet-name>ServletAutenticazione</servlet-name>	
+    	<servlet-class>controller.Autenticazione.ServletAutenticazione</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>ServletAutenticazione</servlet-name>
+    	<url-pattern>/autenticazione</url-pattern>	
+    </servlet-mapping>
+    <servlet>
+    	<servlet-name>ServletRegistrazione</servlet-name>	
+    	<servlet-class>controller.Registrazione.ServletRegistrazione</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>ServletRegistrazione</servlet-name>
+    	<url-pattern>/registrazione</url-pattern>	
+    </servlet-mapping>
+    <servlet>
+    	<servlet-name>ServletGestioneUtenti</servlet-name>	
+    	<servlet-class>controller.GestioneUtenti.ServletGestioneUtenti</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>ServletGestioneUtenti</servlet-name>
+    	<url-pattern>/gestione</url-pattern>	
+    </servlet-mapping>
     
 	<!-- Welcome pages -->
 	<!-- pleonastico: tomcat "tenta" in automatico le index.html e index.jsp -->
 	
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 		
 	<!-- Handle exceptions and errors -->

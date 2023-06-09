@@ -21,7 +21,7 @@ public class StudenteUniversitario extends Utente{
 	public StudenteUniversitario() {
 		super();
 		this.recensioniEsami = new ArrayList<RecensioneEsame>();
-		
+		this.libretto = new Libretto();
 	}
 
 	public PianoFormativo getPianoFormativo() {

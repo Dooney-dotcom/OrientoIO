@@ -18,17 +18,14 @@ if(application.getAttribute("db") == null) {
 
 DatabaseMock db = (DatabaseMock)application.getAttribute("db");
 
-StudenteUniversitario s = db.getStudenti().get("mandarino87");
-session.setAttribute("user", s);
-session.setAttribute("ruolo", "studente");
-session.setAttribute("username", "mandarino87");
 if(session.getAttribute("user") == null) {
 		response.sendRedirect("login");
-	}
+}
 
-s = (StudenteUniversitario) session.getAttribute("user");
+StudenteUniversitario s = (StudenteUniversitario) session.getAttribute("user");
 Libretto libretto = s.getLibretto();
 int CFU_tot = s.getPianoFormativo().getCorso().getTipo() == TipoCorso.TRIENNALE ? 180 : s.getPianoFormativo().getCorso().getTipo() == TipoCorso.MAGISTRALE ? 120 : 300;
+
 if(libretto == null) {
 	response.sendRedirect("login");
 }

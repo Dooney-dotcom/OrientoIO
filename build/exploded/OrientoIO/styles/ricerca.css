@@ -1,0 +1,70 @@
+:root {
+    /* Palette */
+    --charcoal: #264653;
+    --dark-slate-gray: #275c62;
+    --myrtle-green: #287271;
+    --persian-green: #2a9d8f;
+    --verdigris: #62b6ab;
+    --tiffani-blue: #99cec7;
+    --white-smoke: #f5f5f5;
+    --dark:#111111;
+  }
+  
+  body {
+    color: var(--white-smoke);
+  }
+  
+  main {
+    height: 100%;
+    background-color: var(--charcoal);
+  }
+  
+  header {
+    background-color: var(--myrtle-green);
+    color: var(--white-smoke);
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 999;
+  }
+  
+  footer {
+    background-color: var(--myrtle-green);
+  }
+  
+  .logo {
+    transition: all 0.3s ease;
+  }
+  .logo:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  .sidebar {
+    background-color: var(--white-smoke);
+    color: var(--dark);
+    height: inherit;
+  }
+
+  .search-btn, .explore-btn {
+    width: 100%;
+    background-color: var(--charcoal) !important;
+    transition: all 0.2s linear;
+    color: whitesmoke !important;
+  }
+  
+  .search-btn:hover,.explore-btn:hover {
+    background-color: var(--dark-slate-gray) !important;
+    color: whitesmoke !important;
+  }
+
+  i.bi-search {
+    font-size: larger;
+    font-weight: bold;
+  }
+
+  .card {
+    color: var(--dark);
+  }
+
+  .modal {
+    color: var(--dark);
+  }

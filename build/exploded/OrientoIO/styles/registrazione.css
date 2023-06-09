@@ -1,0 +1,66 @@
+:root {
+    /* Palette */
+    --charcoal: #264653;
+    --dark-slate-gray: #275C62;
+    --myrtle-green: #287271;
+    --persian-green: #2A9D8F;
+    --verdigris: #62B6AB;
+    --tiffani-blue: #99CEC7;
+    --white-smoke: #F5F5F5;
+ 
+ }
+
+header{
+    background-color: var(--myrtle-green);
+    color: var(--white-smoke);
+    font-size: 85px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo-container {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.header-logo {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 20px;
+}
+
+#login{
+    background-color: whitesmoke;
+}
+
+main {
+    background-color: var(--tiffani-blue);
+}
+
+.home-title {
+    font-size: 4rem;
+}
+
+footer {
+    background-color: var(--myrtle-green);
+    color: var(--white-smoke);
+}
+
+.registration-btn {
+    width: 100%;
+    background-color: var(--charcoal);
+    border: none;
+    transition: 0.2ms;
+    color: var(--white-smoke);
+    font-size: large;
+}
+
+.registration-btn:hover {
+    background-color: var(--dark-slate-gray) !important;
+}
+
+.box{
+    background-color: var(--white-smoke);
+}
+
+h2{
+    color: var(--charcoal);
+}
