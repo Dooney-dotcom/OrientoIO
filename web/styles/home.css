@@ -60,7 +60,7 @@ header{
 }
 
 .main-row {
-    background-image: url("../images/homepage-background.jpg"); /* Imposta l'immagine di sfondo per la row */
+    background-image: url("../resources/homepage-background.jpg"); /* Imposta l'immagine di sfondo per la row */
     background-size: cover; /* Copre tutto lo spazio disponibile con l'immagine */
     background-position: center center; /* Centra l'immagine verticalmente e orizzontalmente */
     height: 100vh; /* Imposta l'altezza della row pari all'altezza della finestra del browser */

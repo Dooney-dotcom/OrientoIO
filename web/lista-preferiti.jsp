@@ -5,23 +5,37 @@
 
 <%
 
+// 1) Caricamento del Database se non è stato caricato
 if(application.getAttribute("db") == null) {
 	DatabaseMock db = new DatabaseMock();
 	application.setAttribute("db", db);
 }
 
+// 2) Prendere il Database
 DatabaseMock db = (DatabaseMock)application.getAttribute("db");
+
+// 3) Se non si è fatto il login si torna alla pagina di login
+// Attributo user contiene utente oppure studente universitario in base a "ruolo"
+// Attributo username contiene l'username
+// Questi tre attributi vanno impostati in fase di login
 
 if(session.getAttribute("user") == null || session.getAttribute("ruolo") == null || session.getAttribute("username") == null) {
 	response.sendRedirect("login.jsp");
 }
 
+// 4) Check che l'user abbia i permessi per accedere alla pagina
+// Per pagine accessibili da Utente check che non sia amministratore
+// Per pagine accessibili a StudenteUniversitario check che sia "studente"
 String ruolo = (String) session.getAttribute("ruolo");
 String username = (String) session.getAttribute("username");
 
+// Questa pagina è accessibile a utenti
 if(ruolo.equals("amministratore")) {
 	response.sendRedirect("HomeAmministratore.jsp");
-} else if(ruolo.equals("studente") && 
+}
+
+// 5) Check che lo studente non sia bannato
+if(ruolo.equals("studente") && 
 		((StudenteUniversitario) session.getAttribute("user"))
 		.getRestrizione() != null &&
 		((StudenteUniversitario) session.getAttribute("user"))
@@ -29,6 +43,10 @@ if(ruolo.equals("amministratore")) {
 	response.sendRedirect("./login.jsp");
 }
 
+// 6) Per pagine recensione check che lo studente non sia bloccato in scrittura
+// Qui non serve
+
+// 7) Prendere lo studente/utente dalla sessione e iniziare a lavorare
 Utente utente = (Utente) session.getAttribute("user");
 List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
 %>
