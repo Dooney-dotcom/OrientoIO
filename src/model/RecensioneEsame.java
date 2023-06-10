@@ -65,5 +65,45 @@ public class RecensioneEsame {
 	public void setValutazioneProfessore(Integer valutazioneProfessore) {
 		this.valutazioneProfessore = valutazioneProfessore;
 	}
+
+
+	@Override
+	public String toString() {
+		return "RecensioneEsame [studente=" + studente.getUsername() + ", esame=" + esame.getNome() + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((studente == null) ? 0 : studente.hashCode());
+		result = prime * result + ((esame == null) ? 0 : esame.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RecensioneEsame other = (RecensioneEsame) obj;
+		if (studente == null) {
+			if (other.studente != null)
+				return false;
+		} else if (!studente.equals(other.studente))
+			return false;
+		if (esame == null) {
+			if (other.esame != null)
+				return false;
+		} else if (!esame.equals(other.esame))
+			return false;
+		return true;
+	}
+	
 	
 }

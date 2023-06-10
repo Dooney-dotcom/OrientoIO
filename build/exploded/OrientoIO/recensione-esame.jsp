@@ -1,3 +1,4 @@
+<%@page import="java.util.Comparator"%>
 <%@page import="model.TipoRestrizione"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.NumberFormat"%>
@@ -51,15 +52,21 @@ if(ruolo.equals("studente") &&
 }
 
 // 6) Per pagine recensione check che lo studente non sia bloccato in scrittura
-if(((StudenteUniversitario) session.getAttribute("user"))
-.getRestrizione().getTipoRestrizione().equals(TipoRestrizione.SCRITTURA)) {
-    response.sendRedirect("ban.html");
+if(ruolo.equals("studente") && 
+		((StudenteUniversitario) session.getAttribute("user"))
+		.getRestrizione() != null &&
+		((StudenteUniversitario) session.getAttribute("user"))
+		.getRestrizione().getTipoRestrizione().equals(TipoRestrizione.SCRITTURA)){ 
+	response.sendRedirect("ban.html");
 }
 
 // 7) Prendere lo studente/utente dalla sessione e iniziare a lavorare
 StudenteUniversitario s = (StudenteUniversitario) session.getAttribute("user");
 List<Esame> esami = s.getPianoFormativo().getEsami();
-
+esami.sort(Comparator.comparingInt(Esame::getAnno)
+        .thenComparingInt(Esame::getPeriodo)
+        .thenComparingInt(Esame::getCFU)
+        .thenComparing(Esame::getNome));
 NumberFormat formatter = NumberFormat.getInstance(Locale.ITALY);
 formatter.setMaximumFractionDigits(2);
 %>
@@ -213,7 +220,7 @@ formatter.setMaximumFractionDigits(2);
                                 <input type="hidden" id="selected_rating" name="selected_rating" required="required">
 
                                 <h2 class="bold rating-header">
-                                <span class="selected-rating">0</span><small> / 5</small>
+                                <span id="rating-span" class="selected-rating">0</span><small> / 5</small>
                                 </h2>
                                 <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -230,37 +237,6 @@ formatter.setMaximumFractionDigits(2);
                                 <button type="button" class="btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5">
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                 </button>
-
-                                <script>
-                                    jQuery(document).ready(function($){
-            
-                                        $(".btnrating").on('click',(function(e) {
-                                        
-                                        var previous_value = $("#selected_rating").val();
-                                        
-                                        var selected_value = $(this).attr("data-attr");
-                                        $("#selected_rating").val(selected_value);
-                                        
-                                        $(".selected-rating").empty();
-                                        $(".selected-rating").html(selected_value);
-                                        
-                                        for (i = 1; i <= selected_value; ++i) {
-                                        $("#rating-star-"+i).toggleClass('star-selected');
-                                        $("#rating-star-"+i).toggleClass('star-default');
-                                        }
-                                        
-                                        for (ix = 1; ix <= previous_value; ++ix) {
-                                        $("#rating-star-"+ix).toggleClass('star-selected');
-                                        $("#rating-star-"+ix).toggleClass('star-default');
-                                        }
-                                        
-                                        }));
-                                        
-                                            
-                                    });
-            
-                
-                                </script>
                             </div>
                         </div> <!-- End rating professore-->
 
@@ -279,7 +255,7 @@ formatter.setMaximumFractionDigits(2);
                                 <button type="submit" class="btn btn-success">Invia Recensione</button>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6 py-2 pe-4 text-end">
-                                <button type="reset" class="btn btn-danger">Elimina la Recensione</button>
+                                <button type="reset" id="del-btn" class="btn btn-danger">Elimina la Recensione</button>
                             </div>
                         </div>                        
                     </form>

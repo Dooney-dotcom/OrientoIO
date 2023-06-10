@@ -87,6 +87,17 @@
         <url-pattern>/recensioneEsame</url-pattern>
     </servlet-mapping>
 
+	<!-- Servlet FEDERICO -->
+	<servlet>
+        <servlet-name>RecensioneCorsoServlet</servlet-name>
+        <servlet-class>servlets.RecensioneCorsoServlet</servlet-class>
+       
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RecensioneCorsoServlet</servlet-name>
+        <url-pattern>/recensioneCorso</url-pattern>
+    </servlet-mapping>
+	
     <!-- Servlet per l'Autenticazione - ALESSANDRO -->
     <servlet>
     	<servlet-name>ServletAutenticazione</servlet-name>	

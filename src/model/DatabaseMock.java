@@ -322,7 +322,7 @@ public class DatabaseMock {
 		
 		
 		//creazione libretti
-		
+		// Vengono creati alla creazione di uno studente universitario
 		
 		
 		//creazione esami svolti
