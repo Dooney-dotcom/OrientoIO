@@ -1,12 +1,7 @@
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.NumberFormat"%>
-<%@page import="model.TipoCorso"%>
-<%@page import="model.Esame"%>
 <%@page import="java.util.List"%>
-<%@page import="model.EsameSvolto"%>
-<%@page import="model.Libretto"%>
-<%@page import="model.StudenteUniversitario"%>
-<%@page import="model.DatabaseMock"%>
+<%@page import="model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
