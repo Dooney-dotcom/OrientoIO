@@ -12,6 +12,9 @@ public class Libretto {
 	
 	public Libretto() {
 		this.esamiSvolti = new ArrayList<>();
+		this.media = 0.0;
+		this.CFU = 0;
+		this.baseDiLaurea = 0.0;
 	}
 	
 	public Double getMedia() {
