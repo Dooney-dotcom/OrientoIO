@@ -104,7 +104,7 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
             </div>
 
             <!-- Barra per aggiungere un corso ai preferiti -->
-            <div class="row justify-content-center">
+            <div class="row mt-5 justify-content-center">
                 <div class="col-sm-12 col-md-9 py-3">
                     <input type="text" class="form-control text-input" name="corso" id="search-corso" aria-describedby="helpId" placeholder="Cerca un Corso">
                 </div>

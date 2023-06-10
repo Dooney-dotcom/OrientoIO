@@ -1,0 +1,56 @@
+:root {
+    /* Palette */
+    --charcoal: #264653;
+    --dark-slate-gray: #275C62;
+    --myrtle-green: #287271;
+    --persian-green: #2A9D8F;
+    --verdigris: #62B6AB;
+    --tiffani-blue: #99CEC7;
+    --white-smoke: #F5F5F5;
+}
+
+body {
+    background-color: #275C62;
+}
+
+header {
+    background-color: var(--myrtle-green);
+    color: var(--white-smoke);
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 999;
+}
+
+.logo {
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+main {
+    min-height: 100%;
+}
+  
+
+footer {
+    position: absolute;
+    bottom: 0;
+    background-color: var(--myrtle-green);
+    color: whitesmoke;
+}
+
+.ban-icon {
+    color: rgba(218, 13, 13, 0.89);
+    font-size: 4em;
+}
+
+.message-container {
+    background-color: var(--white-smoke);
+
+}
+
+.error-icon {
+    font-size: 6em;
+    color: #2A9D8F;
+}

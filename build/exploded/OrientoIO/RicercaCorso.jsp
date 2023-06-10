@@ -47,8 +47,6 @@ if(ruolo.equals("amministratore")) {
 		
 	}
 		
-	
-	//ricordati di implementare il bottone per l'aggiunta del corso a preferiti
 %>
 <html>
 <head>
@@ -101,8 +99,8 @@ if(ruolo.equals("amministratore")) {
                	<!-- Risultati ricerca -->
                	
                	<!-- for per ogni corso -->
+               	<div class="row justify-content-center align-items-center g-2 mt-2">
                	<%for(CorsoDiLaurea cc : corsiRicercati){ %>
-                    <div class="row justify-content-center align-items-center g-2 mt-2">
                         <div class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center">
                             <div class="card shadow" style="width: 18rem;">
                                 <div class="card-body">
@@ -120,9 +118,9 @@ if(ruolo.equals("amministratore")) {
                                 </div>
                               </div>
                         </div>
-                	</div>
-                <%} %>
                 	
+                <%} %>
+                </div> <!-- div row -->
             </div>
         </div>
     </div>
@@ -443,10 +441,10 @@ if(ruolo.equals("amministratore")) {
                                           Testo recensione
                                       </div>
                                       <div class="col-md-1 text-start">
-                                          Qualitï¿½ dell'insegnamento
+                                          Qualità dell'insegnamento
                                       </div>
                                       <div class="col-md-2 text-start">
-                                          Opportunitï¿½ offerte
+                                          Opportunità offerte
                                       </div>
                                       <div class="col-md-2 text-start">
                                           Sbocchi lavorativi
@@ -481,9 +479,9 @@ if(ruolo.equals("amministratore")) {
                                       
                                       <div class="col-md-2 text-start">
                                       	<form action="SegnalaRecensioneCorso.jsp" method="POST">
-                                      		<input type="text" name="nomeCorso" value="<%= cc.getNome()%>" hidden>
-                                      		<input type="text" name="nomeUniversita" value="<%= cc.getUniversita().getNome()%>" hidden>
-                                      		<input type="text" name="usernameStudente" value="<%= rv.getStudente().getUsername()%>" hidden>
+                                      		<input type="text" name="nomeCorso" value="<%= cc.getNome()%>" hidden="true">
+                                      		<input type="text" name="nomeUniversita" value="<%= cc.getUniversita().getNome()%>" hidden="true">
+                                      		<input type="text" name="usernameStudente" value="<%= rv.getStudente().getUsername()%>" hidden="true">
                                       		<button type="submit" class="btn btn-success">Segnala recensione</button>
                                       	</form> 
                                       </div>
@@ -506,7 +504,7 @@ if(ruolo.equals("amministratore")) {
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>Â© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

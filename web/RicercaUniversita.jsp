@@ -11,7 +11,7 @@ if(application.getAttribute("db") == null){
 
 DatabaseMock db = (DatabaseMock) application.getAttribute("db");
 
-//questi righi vanno eliminati perchè servono solo per il controllo della jsp
+//questi righi vanno eliminati perch&agrave; servono solo per il controllo della jsp
 Utente u = db.getUtenti().get("LucaB"); 
 session.setAttribute("user", u); 
 session.setAttribute("ruolo", "utente");
@@ -41,7 +41,7 @@ if(ruolo.equals("amministratore")) {
 		Map<String, Universita> uni = db.getUniversita();
 		
 		for(String s : uni.keySet()){
-			if(uni.get(s).getNome().toLowerCase().equals(unir.toLowerCase())){
+			if(uni.get(s).getNome().toLowerCase().contains(unir.toLowerCase())){
 				universitaRicercate.add(uni.get(s));
 			}
 		}
@@ -52,7 +52,7 @@ if(ruolo.equals("amministratore")) {
 %>
 <html>
 <head>
-<title>Ricerca Università</title>
+<title>Ricerca Universit&agrave;</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -87,9 +87,9 @@ if(ruolo.equals("amministratore")) {
                 <div class="container">
                     <div class="mt-2 mb-3">
                     	<form action="RicercaUniversita.jsp" method="GET">
-                      		<label for="" class="form-label h6">Università</label>
-                      		<input type="text" class="form-control" name="uniRicercata" id="uniRicercata" aria-describedby="helpId" placeholder="es. Università degli studi di Bologna">
-                      		<button type="submit" class="btn search-btn mt-2" id="eseguiRicerca"><i class="bi bi-search"></i> &nbsp; Ricerca Università</button>
+                      		<label for="" class="form-label h6">Universit&agrave;</label>
+                      		<input type="text" class="form-control" name="uniRicercata" id="uniRicercata" aria-describedby="helpId" placeholder="es. Universit&agrave; degli studi di Bologna">
+                      		<button type="submit" class="btn search-btn mt-2" id="eseguiRicerca"><i class="bi bi-search"></i> &nbsp; Ricerca Universit&agrave;</button>
                     	</form>
                     </div>
                 </div>
@@ -110,7 +110,7 @@ if(ruolo.equals("amministratore")) {
                                   <p class="card-text text-center"><%= cc.getCitta().getNomeCitta() %></p>
                                 </div>
                                 <div class="card-body">
-                                  <button class="btn explore-btn" data-bs-toggle="modal" data-bs-target="#<%= cc.getNome().replace(" ", "_") %>_<%= cc.getCitta().getNomeCitta().replace(" ", "_")%>">Esplora l'Università</button>
+                                  <button class="btn explore-btn" data-bs-toggle="modal" data-bs-target="#<%= cc.getNome().replace(" ", "_") %>_<%= cc.getCitta().getNomeCitta().replace(" ", "_")%>">Esplora l'Universit&agrave;</button>
                                 </div>
                               </div>
                         </div>
@@ -126,18 +126,18 @@ if(ruolo.equals("amministratore")) {
 		<div class="modal-dialog">
 				<div class="modal-content">
 						<div class="modal-header">
-	  						<h5 class="modal-title" id="staticBackdropLabel">Scheda dell'Università</h5>
+	  						<h5 class="modal-title" id="staticBackdropLabel">Scheda dell'Universit&agrave;</h5>
 	  						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 							
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-md-6 col-sm-12">
-									<h2>Università: </h2> <br> <%=uu.getNome() %><br> <br>
-									<h3>Link Università: </h3> <br> <a href="<%= uu.getLinkUniversita()%>"><%=uu.getLinkUniversita() %></a>
+									<h2>Universit&agrave;: </h2> <br> <%=uu.getNome() %><br> <br>
+									<h3>Link Universit&agrave;: </h3> <br> <a href="<%= uu.getLinkUniversita()%>"><%=uu.getLinkUniversita() %></a>
 								</div>
 								<div class="col-md-6 col-sm-12">
-									<h2>Città: </h2> <br> <%=uu.getCitta().getNomeCitta() %> <br> <br>
+									<h2>Citt&agrave;: </h2> <br> <%=uu.getCitta().getNomeCitta() %> <br> <br>
 									<h3>Link Borsa di studio: </h3> <br> <a href="<%= uu.getLinkBorsaDiStudio()%>"><%=uu.getLinkBorsaDiStudio() %></a>
 								</div>
 							</div>
@@ -484,10 +484,10 @@ if(ruolo.equals("amministratore")) {
                                           Testo recensione
                                       </div>
                                       <div class="col-md-1 text-start">
-                                          Qualitï¿½ dell'insegnamento
+                                          Qualit&agrave; dell'insegnamento
                                       </div>
                                       <div class="col-md-2 text-start">
-                                          Opportunitï¿½ offerte
+                                          Opportunit&agrave; offerte
                                       </div>
                                       <div class="col-md-2 text-start">
                                           Sbocchi lavorativi
@@ -549,7 +549,7 @@ if(ruolo.equals("amministratore")) {
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>&agrave; 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

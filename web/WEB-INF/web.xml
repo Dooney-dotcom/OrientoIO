@@ -135,12 +135,12 @@
 	
 	<error-page>
 		<error-code>404</error-code>
-		<location>./notfound.html</location>
+		<location>/notfound.html</location>
 	</error-page>
 
 	<error-page>
 		<exception-type>javax.servlet.ServletException</exception-type>
-		<location>error.html</location>
+		<location>/error.html</location>
 	</error-page>
 	 
 </web-app>

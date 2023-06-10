@@ -110,7 +110,7 @@ if(ruolo.equals("amministratore")) {
                		
                		<input type="text" name="timeStamp" value="<%= LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))%>" hidden>
                                       		
-        			<label for="testoSegnalazione">Scrivici il perchï¿½ questa recensione non va bene!</label>
+        			<label for="testoSegnalazione">Scrivici il perchè questa recensione non va bene!</label>
         		 	<textarea class="form-control" id="testo" name="testo" rows="3"></textarea> </br>
         		 	<button type="submit" class="btn btn-success">Invia Segnalazione</button>
         		</form>
@@ -122,7 +122,7 @@ if(ruolo.equals("amministratore")) {
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>Â© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>
