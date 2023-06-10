@@ -11,7 +11,7 @@ if(application.getAttribute("db") == null){
 
 DatabaseMock db = (DatabaseMock) application.getAttribute("db");
 
-//questi righi vanno eliminati perchï¿½ servono solo per il controllo della jsp
+//questi righi vanno eliminati perchè servono solo per il controllo della jsp
 Utente u = db.getUtenti().get("LucaB"); 
 session.setAttribute("user", u); 
 session.setAttribute("ruolo", "utente");
@@ -33,24 +33,26 @@ if(ruolo.equals("amministratore")) {
 
 	Utente utente = (Utente) session.getAttribute("user");
 	
-	List<CorsoDiLaurea> corsiRicercati = new ArrayList<>();
-	if(request.getParameter("corsoRicercato")!= null){
-		String corsoRicercato = (String) request.getParameter("corsoRicercato");
+	List<Universita> universitaRicercate = new ArrayList<>();
+	if(request.getParameter("uniRicercata")!= null){
+		String unir = (String) request.getParameter("uniRicercata");
+		System.out.println(unir);
 		
-		List<CorsoDiLaurea> corsi = db.getCorsi();
+		Map<String, Universita> uni = db.getUniversita();
 		
-		for(CorsoDiLaurea c : corsi){
-			if(c.getNome().toLowerCase().contains(corsoRicercato.toLowerCase()))
-				corsiRicercati.add(c);
+		for(String s : uni.keySet()){
+			if(uni.get(s).getNome().toLowerCase().equals(unir.toLowerCase())){
+				universitaRicercate.add(uni.get(s));
+			}
 		}
-		//System.out.println(corsiRicercati);
+		System.out.println(universitaRicercate);
 		
 	}
-		
+	
 %>
 <html>
 <head>
-<title>Ricerca Corso</title>
+<title>Ricerca Università</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -84,10 +86,10 @@ if(ruolo.equals("amministratore")) {
                 <h3 class="text-center">Ricerca</h3>
                 <div class="container">
                     <div class="mt-2 mb-3">
-                    	<form action="RicercaCorso.jsp" method="GET">
-                      		<label for="" class="form-label h6">Corso</label>
-                      		<input type="text" class="form-control" name="corsoRicercato" id="corsoRicercato" aria-describedby="helpId" placeholder="es. Ingegneria Informatica">
-                      		<button type="submit" class="btn search-btn mt-2" id="eseguiRicerca"><i class="bi bi-search"></i> &nbsp; Ricerca Corso</button>
+                    	<form action="RicercaUniversita.jsp" method="GET">
+                      		<label for="" class="form-label h6">Università</label>
+                      		<input type="text" class="form-control" name="uniRicercata" id="uniRicercata" aria-describedby="helpId" placeholder="es. Università degli studi di Bologna">
+                      		<button type="submit" class="btn search-btn mt-2" id="eseguiRicerca"><i class="bi bi-search"></i> &nbsp; Ricerca Università</button>
                     	</form>
                     </div>
                 </div>
@@ -98,35 +100,76 @@ if(ruolo.equals("amministratore")) {
                 <div class="container mt-3">
                	<!-- Risultati ricerca -->
                	
-               	<!-- for per ogni corso -->
+               	<!-- for per ogni universita -->
                	<div class="row justify-content-center align-items-center g-2 mt-2">
-               	<%for(CorsoDiLaurea cc : corsiRicercati){ %>
+               	<%for(Universita cc : universitaRicercate){ %>
                         <div class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center">
                             <div class="card shadow" style="width: 18rem;">
                                 <div class="card-body">
                                   <h5 class="card-title text-center"><%=cc.getNome() %></h5>
-                                  <p class="card-text text-center"><%= cc.getUniversita().getNome() %></p>
+                                  <p class="card-text text-center"><%= cc.getCitta().getNomeCitta() %></p>
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                  <li class="list-group-item"><b>Tipo:</b> <%= cc.getTipo() %></li>
-                                  <li class="list-group-item"><b>Sede:</b> <%= cc.getUniversita().getCitta().getNomeCitta() %></li>
-                                  <li class="list-group-item"><b>Lingua:</b> <%= cc.getLingua() %></li>
-                                  <li class="list-group-item"><b>Accesso:</b> <%= cc.getAccesso()%></li>
-                                </ul>
                                 <div class="card-body">
-                                  <button class="btn explore-btn" data-bs-toggle="modal" data-bs-target="#<%= cc.getNome().replace(" ", "_") %>_<%= cc.getUniversita().getNome().replace(" ", "_")%>">Esplora il Corso</button>
+                                  <button class="btn explore-btn" data-bs-toggle="modal" data-bs-target="#<%= cc.getNome().replace(" ", "_") %>_<%= cc.getCitta().getNomeCitta().replace(" ", "_")%>">Esplora l'Università</button>
                                 </div>
                               </div>
                         </div>
                 	
                 <%} %>
-                </div> <!-- div row -->
+                </div>
             </div>
         </div>
     </div>
+    
+    <%for(Universita uu : universitaRicercate){ %>
+    <div class="modal modal-xl fade" id="<%= uu.getNome().replace(" ", "_")%>_<%= uu.getCitta().getNomeCitta().replace(" ", "_") %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+	  						<h5 class="modal-title" id="staticBackdropLabel">Scheda dell'Università</h5>
+	  						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+							
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-6 col-sm-12">
+									<h2>Università: </h2> <br> <%=uu.getNome() %><br> <br>
+									<h3>Link Università: </h3> <br> <a href="<%= uu.getLinkUniversita()%>"><%=uu.getLinkUniversita() %></a>
+								</div>
+								<div class="col-md-6 col-sm-12">
+									<h2>Città: </h2> <br> <%=uu.getCitta().getNomeCitta() %> <br> <br>
+									<h3>Link Borsa di studio: </h3> <br> <a href="<%= uu.getLinkBorsaDiStudio()%>"><%=uu.getLinkBorsaDiStudio() %></a>
+								</div>
+							</div>
+							
+							<div class="row  py-5">
+								<div class="col-sm-12">
+									<ul class="list-group">
+										<%for(CorsoDiLaurea ccc: uu.getCorsiDiLaurea()){ %>
+											<li class="list-group-item py-2">
+												<div class="row">
+													<div class="col-md-9 col-sm-12">
+														<%=ccc.getNome() %>
+													</div>
+													<div class="col-md-3 col-sm-12">
+														<button class="btn explore-btn" data-bs-toggle="modal" data-bs-target="#<%= ccc.getNome().replace(" ", "_") %>_<%= ccc.getUniversita().getNome().replace(" ", "_")%>">Esplora il Corso</button>
+													</div>
+												</div>
+											</li>
+										
+										<%} %>
+									</ul>
+								</div>
+							</div>
+						</div>
+				</div>
+		</div>
+     </div>
+    
+    
 
 	<!-- stesso for per ogni corso, ricordati di collegare target bottone sopra con questo id -->
-	<%for(CorsoDiLaurea cc : corsiRicercati){ %>
+	<%for(CorsoDiLaurea cc : uu.getCorsiDiLaurea()){ %>
     <div class="modal modal-xl fade" id="<%= cc.getNome().replace(" ", "_")%>_<%= cc.getUniversita().getNome().replace(" ", "_") %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -441,10 +484,10 @@ if(ruolo.equals("amministratore")) {
                                           Testo recensione
                                       </div>
                                       <div class="col-md-1 text-start">
-                                          Qualità dell'insegnamento
+                                          Qualitï¿½ dell'insegnamento
                                       </div>
                                       <div class="col-md-2 text-start">
-                                          Opportunità offerte
+                                          Opportunitï¿½ offerte
                                       </div>
                                       <div class="col-md-2 text-start">
                                           Sbocchi lavorativi
@@ -479,9 +522,9 @@ if(ruolo.equals("amministratore")) {
                                       
                                       <div class="col-md-2 text-start">
                                       	<form action="SegnalaRecensioneCorso.jsp" method="POST">
-                                      		<input type="text" name="nomeCorso" value="<%= cc.getNome()%>" hidden="true">
-                                      		<input type="text" name="nomeUniversita" value="<%= cc.getUniversita().getNome()%>" hidden="true">
-                                      		<input type="text" name="usernameStudente" value="<%= rv.getStudente().getUsername()%>" hidden="true">
+                                      		<input type="text" name="nomeCorso" value="<%= cc.getNome()%>" hidden>
+                                      		<input type="text" name="nomeUniversita" value="<%= cc.getUniversita().getNome()%>" hidden>
+                                      		<input type="text" name="usernameStudente" value="<%= rv.getStudente().getUsername()%>" hidden>
                                       		<button type="submit" class="btn btn-success">Segnala recensione</button>
                                       	</form> 
                                       </div>
@@ -499,12 +542,14 @@ if(ruolo.equals("amministratore")) {
 
 				
      <%} %> <!-- fine for corsi -->
+     
+     <%} %> <!-- fine for universita -->
   </main>
   <footer>
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

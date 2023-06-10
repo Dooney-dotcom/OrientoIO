@@ -5,6 +5,11 @@ import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoPeriod;
+import java.time.chrono.Chronology;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalField;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +62,7 @@ public class DatabaseMock {
 		//creazione universita
 		Universita u = new Universita();
 		u.setCitta(c);
-		u.setNome("Università degli studi di Bologna");
+		u.setNome("HalmaMatter");
 		
 		
 		Universita u2 = new Universita();
@@ -106,6 +111,19 @@ public class DatabaseMock {
 		u2.aggiungiCorsoDiLaurea(cdl3);
 		
 		
+		CorsoDiLaurea cdl4 = new CorsoDiLaurea();
+		cdl4.setNome("Ingegneria informatica T");
+		cdl4.setTipo(TipoCorso.TRIENNALE);
+		cdl4.setAccesso("TOLC-I");
+		cdl4.setClasseDiCorso("ING-INF");
+		cdl4.setCoordinatore("Gemitaiz");
+		cdl4.setDipartimento("DISI");
+		cdl4.setLinkCorso("linkCorso");
+		cdl4.setLingua("Romano");
+		
+		cdl4.setUniversita(u2);
+		u2.aggiungiCorsoDiLaurea(cdl4);
+		
 		//creazione piani formativi
 		PianoFormativo pianoFormativo = new PianoFormativo();
 		pianoFormativo.setCorso(cdl);
@@ -131,6 +149,12 @@ public class DatabaseMock {
 		
 		cdl3.aggiungiPianoFormativo(pianoFormativo4);
 		
+		
+		PianoFormativo pianoFormativo5 = new PianoFormativo();
+		pianoFormativo5.setCorso(cdl4);
+		pianoFormativo5.setAnnoImmatricolazione("2022/2023");
+		
+		cdl4.aggiungiPianoFormativo(pianoFormativo5);
 		
 		//creazione esami
 		Esame esame = new Esame();
@@ -186,6 +210,17 @@ public class DatabaseMock {
 		pianoFormativo.aggiungiEsame(esame5);
 		
 		
+		Esame esame6 = new Esame();
+		esame6.setNome("Fondamenti della mista");
+		esame6.setAnno(1);
+		esame6.setCFU(40);
+		esame6.setLinkEsame("link6");
+		esame6.setPeriodo(1);
+		esame6.setSSO("ING-RAP/01");
+		
+		pianoFormativo5.aggiungiEsame(esame6);
+		
+		
 		//creazione amministratori
 		Amministratore amministratore = new Amministratore();
 		amministratore.setUsername("admin1");
@@ -221,9 +256,9 @@ public class DatabaseMock {
 		c.getStudenti().add(studente);
 		
 		StudenteUniversitario studente2 = new StudenteUniversitario();
-		studente2.setUsername("mandarino87");
-		studente2.setNome("Mario");
-		studente2.setCognome("Rossi");
+		studente2.setUsername("MadMan");
+		studente2.setNome("PierFrancesco");
+		studente2.setCognome("Botrugno");
 		studente2.setPianoFormativo(pianoFormativo2);
 		studente2.setCitta(c);
 		studente2.setLibretto(new Libretto());
@@ -317,7 +352,7 @@ public class DatabaseMock {
 		
 		
 		//creazione libretti
-		// Vengono creati alla creazione di uno studente universitario
+		
 		
 		
 		//creazione esami svolti
@@ -352,6 +387,7 @@ public class DatabaseMock {
 		corsi.add(cdl);
 		corsi.add(cdl2);
 		corsi.add(cdl3);
+		corsi.add(cdl4);
 		
 		//aggiunta al db delle citta
 		citta.put(c.getNomeCitta(), c);
