@@ -42,6 +42,7 @@
 
 main {
     background-color: var(--charcoal);
+    min-height: 100vh;
 }
 
 .home-title {

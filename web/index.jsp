@@ -17,7 +17,7 @@
  
       <p>
       	Please wait for the web application to start... &nbsp;
-		<img alt="wait" title="wait" src="images/wait.gif"/>
+		<img alt="wait" title="wait" src="resources/wait.gif"/>
       </p>
 
    </body>

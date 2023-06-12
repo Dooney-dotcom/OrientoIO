@@ -33,6 +33,7 @@ header{
 
 main {
     background-color: var(--tiffani-blue);
+    min-height: 100vh;
 }
 
 .home-title {

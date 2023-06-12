@@ -73,7 +73,7 @@
     <div class="container-fluid">
         <div class="row pt-0 pb-0 shadow">
             <div class="col-md-4 col-sm-12 logo-container pt-0 pb-0 mt-0 mb-0">
-                <img class="header-logo" src="images/logo.png" alt="logo" width="30%">
+                <img class="header-logo" src="resources/logo.png" alt="logo" width="30%">
             </div>
             <div class="col-md-8 col-sm-12 pt-0 mt-0 pb-0 mb-0 pe-5 text-end">
                 <span class="home-title h1">OrientoIO</span>
@@ -193,12 +193,12 @@
                     <!-- input cittaUniversitaria -->
                     <!-- riempito dinamicamente alla scelta dell'Universita -->
                     <div class="form-outline mb-4" id="Universita">
-                        <label class="form-check-label" for="Universita">Seleziona la tua Università:</label> </br>
+                        <label class="form-check-label" for="Universita">Seleziona la tua Universitï¿½:</label> </br>
                         <select class="form-select" id="uni" name="uni" aria-label="Default select example">
                             <option value="" disabled selected>Seleziona un'opzione...</option>
                             <option value="1">Alma Mater Studiorum-Unibo</option>
                             <option value="2">Politecnico di Milano-PoliMi</option>
-                            <option value="3">Università "La Sapienza"-Roma</option>
+                            <option value="3">Universitï¿½ "La Sapienza"-Roma</option>
                         </select>
                     </div>
                 </div>
@@ -238,7 +238,7 @@
                             <option value="" disabled selected>Seleziona un'opzione...</option>
                             <option value="1">Alma Mater Studiorum-Unibo</option>
                             <option value="2">Politecnico di Milano-PoliMi</option>
-                            <option value="3">Università "La Sapienza"-Roma</option>
+                            <option value="3">Universitï¿½ "La Sapienza"-Roma</option>
                         </select>
                     </div>
                 </div>
@@ -267,7 +267,7 @@
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

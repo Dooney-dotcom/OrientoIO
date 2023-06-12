@@ -36,7 +36,7 @@
     <div class="container-fluid shadow">
         <div class="row">
             <div class="col-sm-12 pt-2 pb-2 text-center">
-                <img src="images/logo-footer.png" class="img-fluid logo" alt="" width="15%">
+                <img src="resources/logo-footer.png" class="img-fluid logo" alt="" width="15%">
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h4>Esplora le funzionalità della nostra piattaforma</h4>
+                <h4>Esplora le funzionalitï¿½ della nostra piattaforma</h4>
             </div>
         </div>
         <div class="row main-row pt-4 ps-4 pe-4">
@@ -58,7 +58,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container rounded-top">
-                        <img class="card-img-top university-img rounded-top" src="images/university.jpg" alt="Card image cap">
+                        <img class="card-img-top university-img rounded-top" src="resources/university.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Gestione Utenti</h5>
@@ -71,7 +71,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/class.jpg" width="400px" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="resources/class.jpg" width="400px" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Convalida Informazioni</h5>
@@ -88,7 +88,7 @@
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

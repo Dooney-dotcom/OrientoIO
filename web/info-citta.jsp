@@ -65,7 +65,7 @@
         <div class="container-fluid shadow">
             <div class="row">
                 <div class="col-sm-12 pt-2 pb-2 text-center">
-                    <img src="images/logo-footer.png" class="img-fluid logo" alt="" width="15%">
+                    <img src="resources/logo-footer.png" class="img-fluid logo" alt="" width="15%">
                 </div>
             </div>
         </div>

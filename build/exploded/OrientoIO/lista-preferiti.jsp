@@ -220,41 +220,37 @@ List<CorsoDiLaurea> list = utente.getListaPreferiti().getCorsiDiLaurea();
                                                   </div>
                                                   
                                                   <div class="row mb-2 ms-2 me-2 mt-2" style="border-bottom-width: 0.5px; border-bottom-style: solid;">
-                                                      <div class="col-sm-4 ps-3 text-start">
+                                                      <div class="col-sm-12 col-md-3 ps-3 text-start">
                                                           Nome Esame
                                                       </div>
-                                                      <div class="col-sm-2 text-center">
+                                                      <div class="col-sm-12 col-md-3 text-center">
                                                           Periodo
                                                       </div>
-                                                      <div class="col-sm-2 text-center">
+                                                      <div class="col-sm-12 col-md-3 text-center">
                                                           SSD
                                                       </div>
-                                                      <div class="col-sm-2 text-center">
+                                                      <div class="col-sm-12 col-md-3 text-center">
                                                           CFU
-                                                      </div>
-                                                      <div class="col-sm-2 text-center">
-                                                          
                                                       </div>
                                                   </div>
                                                   
                                                   <!-- for per ogni esame -->
                                                   <%for(Esame e : f.getEsami()){ %>
                                                   <div class="row pb-2 pt-2 exam-row d-flex align-items-center">
-                                                      <div class="col-sm-4 ps-3 text-start">
+                                                      <div class="col-sm-12 col-md-3 ps-3 text-start">
                                                           <%= e.getNome() %>
                                                       </div>
-                                                      <div class="col-sm-2 text-center">
+                                                      <div class="col-sm-12 col-md-3 text-center">
                                                           <%= e.getPeriodo() %>
                                                       </div>
-                                                      <div class="col-sm-2 text-center">
+                                                      <div class="col-sm-12 col-md-3 text-center">
                                                           <%= e.getSSO() %>
                                                       </div>
-                                                      <div class="col-sm-2 text-center">
+                                                      <div class="col-sm-12 col-md-3 text-center">
                                                           <%= e.getCFU() %>
                                                       </div>
-                                                      <div class="col-sm-2 text-center">
-                                                          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#<%= cc.getNome().replace(" ", "_")%>_<%= cc.getUniversita().getNome().replace(" ", "_") %>_<%=f.getAnnoImmatricolazione().replace("/", "_")%>_<%=e.getNome().replace(" ", "_")%>">Scheda Esame</button>
-                                                          <!-- bisogna collegare questo alla view dell'esame -->
+                                                      <div class="col-sm-12 col-md-3 text-center">
+                                                          
                                                       </div>
                                                   </div>
                                                   

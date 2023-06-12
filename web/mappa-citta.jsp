@@ -44,7 +44,7 @@
     <div class="container-fluid shadow">
         <div class="row">
             <div class="col-sm-12 pt-2 pb-2 text-center">
-                <img src="images/logo-footer.png" class="img-fluid logo" alt="" width="15%">
+                <img src="resources/logo-footer.png" class="img-fluid logo" alt="" width="15%">
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
       				<div class="col-sm-12 col-md-4 mt-4 mb-2 d-flex justify-content-center align-items-center">
           				<div class="city-card" data-bs-toggle="modal" data-bs-target="#<%=s%>">
               				<h4><%= citta.get(s).getNomeCitta()%></h4>
-              				<img src="images/<%= citta.get(s).getNomeCitta().toLowerCase() %>.jpg" alt="">
+              				<img src="resources/<%= citta.get(s).getNomeCitta().toLowerCase() %>.jpg" alt="">
           				</div>
        				</div>
       			<%
@@ -88,7 +88,7 @@
               						</div>
               					<div class="col-sm-4">
                 					<div class="img-container">
-                  						<img class="city-img" src="images/<%= citta.get(s).getNomeCitta().toLowerCase() %>.jpg" alt="Bologna">
+                  						<img class="city-img" src="resources/<%= citta.get(s).getNomeCitta().toLowerCase() %>.jpg" alt="Bologna">
                 					</div>
               					</div>
             				</div>
@@ -249,7 +249,7 @@
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>
