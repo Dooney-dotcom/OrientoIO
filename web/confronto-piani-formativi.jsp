@@ -20,6 +20,7 @@ DatabaseMock db = (DatabaseMock)application.getAttribute("db");
 
 if(session.getAttribute("user") == null || session.getAttribute("ruolo") == null || session.getAttribute("username") == null) {
 	response.sendRedirect("login.jsp");
+	return;
 }
 
 // 4) Check che l'user abbia i permessi per accedere alla pagina
@@ -31,6 +32,7 @@ String username = (String) session.getAttribute("username");
 // Questa pagina è accessibile a utenti
 if(ruolo.equals("amministratore")) {
 	response.sendRedirect("HomeAmministratore.jsp");
+	return;
 }
 
 // 5) Check che lo studente non sia bannato
@@ -40,6 +42,7 @@ if(ruolo.equals("studente") &&
 		((StudenteUniversitario) session.getAttribute("user"))
 		.getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)){ 
 	response.sendRedirect("./login.jsp");
+	return;
 }
 
 // 6) Per pagine recensione check che lo studente non sia bloccato in scrittura

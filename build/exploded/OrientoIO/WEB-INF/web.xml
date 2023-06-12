@@ -116,12 +116,36 @@
     	<url-pattern>/registrazione</url-pattern>	
     </servlet-mapping>
     <servlet>
+    	<servlet-name>ServletInfoCitta</servlet-name>	
+    	<servlet-class>controller.InfoCitta.ServletInfoCitta</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>ServletInfoCitta</servlet-name>
+    	<url-pattern>/infocitta</url-pattern>	
+    </servlet-mapping>
+    <servlet>
+    	<servlet-name>ServletLuoghiPreferiti</servlet-name>	
+    	<servlet-class>controller.InfoCitta.ServletLuoghiPreferiti</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>ServletLuoghiPreferiti</servlet-name>
+    	<url-pattern>/luogopreferito</url-pattern>	
+    </servlet-mapping>
+    <servlet>
+    	<servlet-name>ServletConvalida</servlet-name>	
+    	<servlet-class>controller.InfoCitta.ServletConvalida</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>ServletConvalida</servlet-name>
+    	<url-pattern>/convalida</url-pattern>	
+    </servlet-mapping>
+    <servlet>
     	<servlet-name>ServletGestioneUtenti</servlet-name>	
     	<servlet-class>controller.GestioneUtenti.ServletGestioneUtenti</servlet-class>
     </servlet>
     <servlet-mapping>
     	<servlet-name>ServletGestioneUtenti</servlet-name>
-    	<url-pattern>/gestione</url-pattern>	
+    	<url-pattern>/gestioneutenti</url-pattern>	
     </servlet-mapping>
     
 	<!-- Welcome pages -->

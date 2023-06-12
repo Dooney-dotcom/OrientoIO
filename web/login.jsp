@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="model.*" %>
+<%@ page import="model.DatabaseMock.DatabaseMock" %>
 
 <%
 if(this.getServletContext().getAttribute("db") == null) {
@@ -33,7 +33,7 @@ if(this.getServletContext().getAttribute("db") == null) {
     <div class="container-fluid">
         <div class="row pt-0 pb-0 shadow">
             <div class="col-md-4 col-sm-12 logo-container pt-0 pb-0 mt-0 mb-0">
-                <img class="header-logo" src="./resources/logo-footer.png" alt="logo" width="30%">
+                <img class="header-logo" src="images/logo.png" alt="logo" width="30%">
             </div>
             <div class="col-md-8 col-sm-12 pt-0 mt-0 pb-0 mb-0 pe-5 text-end">
                 <span class="home-title h1">OrientoIO</span>
@@ -83,7 +83,7 @@ if(this.getServletContext().getAttribute("db") == null) {
                         <!-- Register buttons -->
                         <hr>
                         <h6>Non sei ancora registrato?</h6>
-                        <a href="./registrazione.html" type="button" class="btn btn-outline-primary registration-btn"><b>Registrati</b></a>
+                        <a href="registrazione.jsp" type="button" class="btn btn-outline-primary registration-btn"><b>Registrati</b></a>
                       </form>
             </div>
         </div>
@@ -93,7 +93,7 @@ if(this.getServletContext().getAttribute("db") == null) {
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>Â© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

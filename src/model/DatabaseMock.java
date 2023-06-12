@@ -28,7 +28,8 @@ public class DatabaseMock {
 	private List<SegnalazioneRecensioneCorso> segnalazioniCorso;
 	private List<RecensioneEsame> recensioniEsami;
 	private List<SegnalazioneRecensioneEsame> segnalazioniEsami;
-	//
+	//Alessandro
+	private List<InformazioniCitta> infoCitta;
 	
 	public DatabaseMock() {
 		this.accounts = new HashMap<>();
@@ -44,6 +45,8 @@ public class DatabaseMock {
 		this.recensioniEsami = new ArrayList<>();
 		this.segnalazioniEsami = new ArrayList<>();
 		//
+		
+		this.infoCitta = new ArrayList<>();
 		
 		
 		//creazione citta
@@ -423,6 +426,14 @@ public class DatabaseMock {
 		
 		//aggiunta al db delle recensioni corso
 		segnalazioniEsami.add(sre);
+	}
+
+	public List<InformazioniCitta> getInfoCitta() {
+		return infoCitta;
+	}
+
+	public void setInfoCitta(List<InformazioniCitta> infoCitta) {
+		this.infoCitta = infoCitta;
 	}
 
 	public Map<String, Account> getAccounts() {

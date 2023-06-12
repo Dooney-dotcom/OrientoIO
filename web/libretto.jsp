@@ -22,6 +22,7 @@ DatabaseMock db = (DatabaseMock)application.getAttribute("db");
 
 if(session.getAttribute("user") == null || session.getAttribute("ruolo") == null || session.getAttribute("username") == null) {
 	response.sendRedirect("login.jsp");
+	return;
 }
 
 // 4) Check che l'user abbia i permessi per accedere alla pagina
@@ -33,6 +34,7 @@ String username = (String) session.getAttribute("username");
 // Questa pagina è accessibile solo a studenti
 if(!ruolo.equals("studente")) {
 	response.sendRedirect("HomeAmministratore.jsp");
+	return;
 }
 
 // 5) Check che lo studente non sia bannato
@@ -41,7 +43,8 @@ if(ruolo.equals("studente") &&
 		.getRestrizione() != null &&
 		((StudenteUniversitario) session.getAttribute("user"))
 		.getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)){ 
-	response.sendRedirect("./login.jsp");
+	response.sendRedirect("login.jsp");
+	return;
 }
 
 // 6) Per pagine recensione check che lo studente non sia bloccato in scrittura
@@ -53,7 +56,8 @@ Libretto libretto = s.getLibretto();
 int CFU_tot = s.getPianoFormativo().getCorso().getTipo() == TipoCorso.TRIENNALE ? 180 : s.getPianoFormativo().getCorso().getTipo() == TipoCorso.MAGISTRALE ? 120 : 300;
 
 if(libretto == null) {
-	response.sendRedirect("login");
+	response.sendRedirect("login.jsp");
+	return;
 }
 
 NumberFormat formatter = NumberFormat.getInstance(Locale.ITALY);

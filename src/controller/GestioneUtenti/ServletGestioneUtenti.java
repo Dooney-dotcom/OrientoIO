@@ -1,6 +1,10 @@
 package controller.GestioneUtenti;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +27,38 @@ private static final long serialVersionUID = 1L;
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DatabaseMock db = (DatabaseMock) this.getServletContext().getAttribute("db");
+		Map<String, StudenteUniversitario> studenti = db.getStudenti();
+		
+		String button = request.getParameter("b");
+		String target = request.getParameter("target"); 
+		String r = request.getParameter("r");
+		String d = request.getParameter("d");
+		
+		StudenteUniversitario s = studenti.get(target);
+		
+		//Caso Applica
+		if(button.equals("applica")) {
+			Restrizione restr = new Restrizione();
+			if(r.equals("ban")) {
+				restr.setTipoRestrizione(TipoRestrizione.BAN);
+			}else if(r.equals("scrittura")) {
+				restr.setTipoRestrizione(TipoRestrizione.SCRITTURA);
+			}
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			restr.setScadenza(LocalDateTime.of(LocalDate.parse(d, formatter), LocalTime.now()));
+			s.setRestrizione(restr);
+		}else //Caso Rimuovi
+			if(button.equals("rimuovi")) {
+				s.setRestrizione(null);
+			}
+		db.setStudenti(studenti);
+		this.getServletContext().setAttribute("db", db);
+		response.sendRedirect("/gestione-utenti.jsp");
+	}
+	
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Restituisce la lista con gli utenti/l'utente ricercato
 		String word = request.getParameter("word");
 		if(word != null) {
@@ -39,14 +75,10 @@ private static final long serialVersionUID = 1L;
 			
 			if(!studentiCercati.isEmpty()) {
 				this.getServletContext().setAttribute("ricerca", studentiCercati);
+			}else {
+				this.getServletContext().setAttribute("ricerca", studenti);
 			}
 		}
 		this.getServletContext().getRequestDispatcher("/gestione-utenti.jsp").forward(request, response);
 	}
-	
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String button = request.getParameter("");
-	}
-
 }

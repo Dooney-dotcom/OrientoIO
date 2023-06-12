@@ -37,18 +37,23 @@ session.setAttribute("username", "mandarino87");
 
 if(session.getAttribute("user") == null || session.getAttribute("ruolo") == null || session.getAttribute("username") == null) {
 	response.sendRedirect("./login.jsp");
+	return;
 }
 
 String ruolo = (String) session.getAttribute("ruolo");
 String username = (String) session.getAttribute("username");
 
 if(!ruolo.equals("studente") || (ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione()!=null )) {
-	if(((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN))
+	if(((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)) {
 		response.sendRedirect("./login.jsp");
+		return;
+	}
 } else {
 		if(ruolo.equals("studente") && (ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione()!=null )){ 
-			if(((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.SCRITTURA))
+			if(((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.SCRITTURA)) {
 				response.sendRedirect("./HomeStudente.jsp");
+				return;
+			}
 		}else{
 
 			StudenteUniversitario s = db.getStudenti().get(username);

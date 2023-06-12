@@ -2,7 +2,33 @@
 <%@ page import="model.*" %>
 
 <%
-	StudenteUniversitario stud = (StudenteUniversitario) this.getServletContext().getAttribute("stud");
+	if(request.getSession().getAttribute("user") == null || request.getSession().getAttribute("ruolo") == null || request.getSession().getAttribute("username") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+	}
+
+	System.out.println("RUOLO: "+ request.getSession().getAttribute("ruolo"));
+	
+	if(request.getSession().getAttribute("ruolo").equals("utente")) {
+		response.sendRedirect("homepage-utente.jsp");
+		return;
+	}else if(((String)request.getSession().getAttribute("ruolo")).equals("amministratore")){
+		response.sendRedirect("HomeAmministratore.jsp");
+		return;
+	}
+
+	StudenteUniversitario stud = (StudenteUniversitario) request.getSession().getAttribute("user");
+	String ruolo = (String) request.getSession().getAttribute("ruolo");
+	
+	if(stud.getRestrizione() != null){
+		System.out.println("RESTRIZIONE: "+stud.getRestrizione().gTipoRestrizione().toString());
+	}
+	
+	if(ruolo.equals("studente") && (stud.getRestrizione() != null && stud.getRestrizione().gTipoRestrizione().equals(TipoRestrizione.BAN))){
+		response.sendRedirect("login.jsp");
+		return;
+	}
+	
 %>
 
 <!doctype html>
@@ -39,7 +65,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h4>Esplora le funzionalitï¿½ della nostra piattaforma</h4>
+                <h4>Esplora le funzionalità della nostra piattaforma</h4>
             </div>
         </div>
         <div class="row main-row pt-4 ps-4 pe-4">
@@ -50,7 +76,7 @@
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Ricerca</h5>
-                      <p class="card-text">Ricerca tra tutti i corsi e universit&agrave; del nostro database ciï¿½ che piï¿½ fa per te</p>
+                      <p class="card-text">Ricerca tra tutti i corsi e universit&agrave; del nostro database ciò che più fa per te</p>
                       <a href="#" class="btn go-btn">Ricerca Corsi</a>
                       <a href="#" class="btn go-btn mt-2">Ricerca Universit&agrave;</a>
                     </div>
@@ -86,9 +112,9 @@
                         <img class="card-img-top rounded-top" src="images/city.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
-                      <h5 class="card-title">Mappa Cittï¿½</h5>
-                      <p class="card-text">Ottieni piï¿½ informazioni sulle citt&agrave; universitarie sparse per l'Italia!</p>
-                      <a href="#" class="btn go-btn">Vai alla mappa</a>
+                      <h5 class="card-title">Mappa Città</h5>
+                      <p class="card-text">Ottieni più informazioni sulle citt&agrave; universitarie sparse per l'Italia!</p>
+                      <a href="mappa-citta.jsp" class="btn go-btn">Vai alla mappa</a>
                     </div>
                 </div>
             </div>
@@ -101,10 +127,9 @@
                         <img class="card-img-top university-img rounded-top" src="images/university.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
-                      <h5 class="card-title">Ricerca</h5>
-                      <p class="card-text">Ricerca tra tutti i corsi e universit&agrave; del nostro database ciï¿½ che piï¿½ fa per te</p>
-                      <a href="#" class="btn go-btn">Ricerca Corsi</a>
-                      <a href="#" class="btn go-btn mt-2">Ricerca Universit&agrave;</a>
+                      <h5 class="card-title">Info Citta</h5>
+                      <p class="card-text">Inserisci le informazioni inerenti alla citt&agrave; in cui vivi!</p>
+                      <a href="info-citta.jsp" class="btn go-btn">Inserisci Info Citta</a>
                     </div>
                 </div>
             </div>
@@ -114,9 +139,9 @@
                         <img class="card-img-top rounded-top" src="images/class.jpg" width="400px" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
-                      <h5 class="card-title">Lista Preferiti</h5>
-                      <p class="card-text">Esplora la lista dei tuoi corsi preferiti e ottieni pi&ugrave; informazioni</p>
-                      <a href="#" class="btn go-btn">Corsi Preferiti</a>
+                      <h5 class="card-title">Recensione Corso</h5>
+                      <p class="card-text">Recensisci il tuo Corso di Laurea!</p>
+                      <a href="#" class="btn go-btn">Recensisci Corso</a>
                     </div>
                 </div>
             </div>
@@ -126,9 +151,9 @@
                         <img class="card-img-top rounded-top" src="images/exam.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
-                      <h5 class="card-title">Piani Formativi</h5>
-                      <p class="card-text">Confronta varie liste di esami dei corsi e scopri le loro differenze</p>
-                      <a href="#" class="btn go-btn">Confronta</a>
+                      <h5 class="card-title">Recensione Esame</h5>
+                      <p class="card-text">Recensisci i tuoi Esami!</p>
+                      <a href="#" class="btn go-btn">Recensisci Esame</a>
                     </div>
                 </div>
             </div>
@@ -138,9 +163,9 @@
                         <img class="card-img-top rounded-top" src="images/city.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
-                      <h5 class="card-title">Mappa Cittï¿½</h5>
-                      <p class="card-text">Ottieni piï¿½ informazioni sulle citt&agrave; universitarie sparse per l'Italia!</p>
-                      <a href="#" class="btn go-btn">Vai alla mappa</a>
+                      <h5 class="card-title">Gestione Libretto</h5>
+                      <p class="card-text">Inserisci e gestisci al meglio il tuo Libretto Universitario!</p>
+                      <a href="#" class="btn go-btn">Vai al tuo libretto</a>
                     </div>
                 </div>
             </div>
@@ -151,7 +176,7 @@
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

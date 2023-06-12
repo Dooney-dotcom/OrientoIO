@@ -15,6 +15,7 @@ DatabaseMock db = (DatabaseMock) application.getAttribute("db");
 
 if(session.getAttribute("user") == null || session.getAttribute("ruolo") == null || session.getAttribute("username") == null) {
 	response.sendRedirect("./login.jsp");
+	return;
 }
 
 String ruolo = (String) session.getAttribute("ruolo");
@@ -22,8 +23,10 @@ String username = (String) session.getAttribute("username");
 
 if(ruolo.equals("amministratore")) {
 	response.sendRedirect("./HomeAmministratore.jsp");
+	return;
 } else if(ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)){ 
 	response.sendRedirect("./login.jsp");
+	return;
 }else{
 
 	Utente utente = (Utente) session.getAttribute("user");

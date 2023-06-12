@@ -12,10 +12,11 @@ public class InformazioniCitta {
     private int livelloCulturale;
     private String recensioneCitta;
     private List<LuogoPreferito> listaLuoghiPreferiti;
-
+    private StatoConvalida statoConvalida;
     //Costruttore
     public InformazioniCitta(){
         this.listaLuoghiPreferiti=new ArrayList<LuogoPreferito>();
+        this.statoConvalida = StatoConvalida.IN_ATTESA;
     }
 
     //Getters and Setters
@@ -79,4 +80,14 @@ public class InformazioniCitta {
     public boolean aggiungiLuogoPreferito(LuogoPreferito l){
         return this.listaLuoghiPreferiti.add(l);
     }
+
+	public StatoConvalida getStatoConvalida() {
+		return statoConvalida;
+	}
+
+	public void setStatoConvalida(StatoConvalida statoConvalida) {
+		this.statoConvalida = statoConvalida;
+	}
+    
+    
 }

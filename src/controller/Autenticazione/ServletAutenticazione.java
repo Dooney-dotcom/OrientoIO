@@ -1,9 +1,11 @@
 package controller.Autenticazione;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,19 +37,36 @@ private static final long serialVersionUID = 1L;
 			Map<String, Utente> utenti = db.getUtenti();
 			
 			//Caso Admin
-			if(username.equals("admin") && password.equals("admin")) {
-				//La pagina di gestione utenti diventerà una jsp
-				this.getServletContext().getRequestDispatcher("/gestione-utenti.jsp").forward(request, response);
+			if(username.startsWith("admin")) {
+				if(accounts.containsKey(username)) {
+					//La pagina di gestione utenti diventerà una jsp
+					if(password.equals(accounts.get(username).getPassword())) {
+						request.getSession().setAttribute("user", accounts.get(username));
+						request.getSession().setAttribute("username", username);
+						request.getSession().setAttribute("ruolo", "amministratore");
+						this.getServletContext().getRequestDispatcher("/HomeAmministratore.jsp").forward(request, response);
+					}else {
+						this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+					}
+				}else {
+					this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+				}
 			}else {
 				if(accounts.containsKey(username)) {
 					if(accounts.get(username).getPassword().equals(password)) {
 						//Caso Studente
 						if(studenti.containsKey(username)) {
-							this.getServletContext().setAttribute("stud", studenti.get(username));
+							request.getSession().setAttribute("user", studenti.get(username));
+							request.getSession().setAttribute("ruolo", "studente");
+							request.getSession().setAttribute("username", username);
+							System.out.println("STUDENTE: "+studenti.get(username).getUsername());
 							this.getServletContext().getRequestDispatcher("/homepage-studente.jsp").forward(request, response);
 						}//Caso Utente
 						else if(utenti.containsKey(username)) {
-							this.getServletContext().setAttribute("user", utenti.get(username));
+							request.getSession().setAttribute("user", utenti.get(username));
+							request.getSession().setAttribute("ruolo", "utente");
+							request.getSession().setAttribute("username", username);
+							System.out.println("UTENTE: "+utenti.get(username).getUsername());
 							this.getServletContext().getRequestDispatcher("/homepage-utente.jsp").forward(request, response);
 						}
 					}else {

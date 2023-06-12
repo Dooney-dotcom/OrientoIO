@@ -1,8 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="model.*" %>
+<%@ page import="model.Attori.Utente" %>
 
 <%
-	Utente user = (Utente) this.getServletContext().getAttribute("user");
+	if(request.getSession().getAttribute("user") == null || request.getSession().getAttribute("ruolo") == null || request.getSession().getAttribute("username") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+	}
+	
+	if(request.getSession().getAttribute("ruolo").equals("studente")) {
+		response.sendRedirect("homepage-studente.jsp");
+		return;
+	}else if(request.getSession().getAttribute("ruolo").equals("amministratore")){
+		response.sendRedirect("HomeAmministratore.jsp");
+		return;
+	}
+
+	Utente user = (Utente) request.getSession().getAttribute("user");
 %>
 
 <!doctype html>
@@ -39,7 +52,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h4>Esplora le funzionalitï¿½ della nostra piattaforma</h4>
+                <h4>Esplora le funzionalità della nostra piattaforma</h4>
             </div>
         </div>
         <div class="row main-row pt-4 ps-4 pe-4">
@@ -50,7 +63,7 @@
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Ricerca</h5>
-                      <p class="card-text">Ricerca tra tutti i corsi e universit&agrave; del nostro database ciï¿½ che piï¿½ fa per te</p>
+                      <p class="card-text">Ricerca tra tutti i corsi e universit&agrave; del nostro database ciò che più fa per te</p>
                       <a href="#" class="btn go-btn">Ricerca Corsi</a>
                       <a href="#" class="btn go-btn mt-2">Ricerca Universit&agrave;</a>
                     </div>
@@ -86,9 +99,9 @@
                         <img class="card-img-top rounded-top" src="images/city.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
-                      <h5 class="card-title">Mappa Cittï¿½</h5>
-                      <p class="card-text">Ottieni piï¿½ informazioni sulle citt&agrave; universitarie sparse per l'Italia!</p>
-                      <a href="#" class="btn go-btn">Vai alla mappa</a>
+                      <h5 class="card-title">Mappa Città</h5>
+                      <p class="card-text">Ottieni più informazioni sulle citt&agrave; universitarie sparse per l'Italia!</p>
+                      <a href="<%= request.getContextPath() %>/mappa-citta.jsp" class="btn go-btn">Vai alla mappa</a>
                     </div>
                 </div>
             </div>
@@ -99,7 +112,7 @@
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>
