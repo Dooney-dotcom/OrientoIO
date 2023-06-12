@@ -21,10 +21,10 @@
 	String ruolo = (String) request.getSession().getAttribute("ruolo");
 	
 	if(stud.getRestrizione() != null){
-		System.out.println("RESTRIZIONE: "+stud.getRestrizione().gTipoRestrizione().toString());
+		System.out.println("RESTRIZIONE: "+stud.getRestrizione().getTipoRestrizione().toString());
 	}
 	
-	if(ruolo.equals("studente") && (stud.getRestrizione() != null && stud.getRestrizione().gTipoRestrizione().equals(TipoRestrizione.BAN))){
+	if(ruolo.equals("studente") && (stud.getRestrizione() != null && stud.getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN))){
 		response.sendRedirect("login.jsp");
 		return;
 	}

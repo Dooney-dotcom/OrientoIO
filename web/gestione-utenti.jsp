@@ -96,8 +96,8 @@
                 			String restr = "";
                 			String scadenza = "";
                 			if(s.getRestrizione() != null){
-                				if(s.getRestrizione().gTipoRestrizione() != null){
-                    				restr = s.getRestrizione().gTipoRestrizione().toString();
+                				if(s.getRestrizione().getTipoRestrizione() != null){
+                    				restr = s.getRestrizione().getTipoRestrizione().toString();
                     			}
                     			if(s.getRestrizione().getScadenza() != null){
                     				scadenza = s.getRestrizione().getScadenza().toString();
@@ -161,7 +161,7 @@
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

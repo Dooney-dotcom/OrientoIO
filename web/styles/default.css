@@ -41,6 +41,7 @@ h1 {
 
 #main {
 	border: 2px solid grey;
+	min-height: 100vh;
 	margin-left: 2px;
 	margin-right: 2px;
 	padding: 5px;

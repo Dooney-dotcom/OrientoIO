@@ -65,6 +65,7 @@ main {
     /*height: 135vh; /* Imposta l'altezza della row pari all'altezza della finestra del browser */
     background-color: var(--charcoal);
     color: black;
+    min-height: 100vh;
 }
 
 .libretto-cont {
