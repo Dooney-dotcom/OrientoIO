@@ -33,7 +33,7 @@ String username = (String) session.getAttribute("username");
 
 // Questa pagina è accessibile solo a studenti
 if(!ruolo.equals("studente")) {
-	response.sendRedirect("HomeAmministratore.jsp");
+	response.sendRedirect("login.jsp");
 	return;
 }
 

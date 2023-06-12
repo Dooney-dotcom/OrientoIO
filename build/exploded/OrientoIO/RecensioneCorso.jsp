@@ -28,13 +28,6 @@ if(application.getAttribute("db") == null){
 
 DatabaseMock db = (DatabaseMock) application.getAttribute("db");
 
-//questi righi vanno eliminati perchè servono solo per il controllo della jsp
-StudenteUniversitario u = db.getStudenti().get("mandarino87"); 
-session.setAttribute("user", u); 
-session.setAttribute("ruolo", "studente");
-session.setAttribute("username", "mandarino87");
-//
-
 if(session.getAttribute("user") == null || session.getAttribute("ruolo") == null || session.getAttribute("username") == null) {
 	response.sendRedirect("./login.jsp");
 	return;
@@ -333,7 +326,7 @@ RecensioneCorso rc = s.getRecensioneCorso();
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>© 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>ï¿½ 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>
