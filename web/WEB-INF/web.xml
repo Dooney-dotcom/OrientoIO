@@ -117,7 +117,7 @@
     </servlet-mapping>
     <servlet>
     	<servlet-name>ServletInfoCitta</servlet-name>	
-    	<servlet-class>controller.InfoCitta.ServletInfoCitta</servlet-class>
+    	<servlet-class>servlets.ServletInfoCitta</servlet-class>
     </servlet>
     <servlet-mapping>
     	<servlet-name>ServletInfoCitta</servlet-name>
@@ -125,7 +125,7 @@
     </servlet-mapping>
     <servlet>
     	<servlet-name>ServletLuoghiPreferiti</servlet-name>	
-    	<servlet-class>controller.InfoCitta.ServletLuoghiPreferiti</servlet-class>
+    	<servlet-class>servlets.ServletLuoghiPreferiti</servlet-class>
     </servlet>
     <servlet-mapping>
     	<servlet-name>ServletLuoghiPreferiti</servlet-name>
@@ -133,7 +133,7 @@
     </servlet-mapping>
     <servlet>
     	<servlet-name>ServletConvalida</servlet-name>	
-    	<servlet-class>controller.InfoCitta.ServletConvalida</servlet-class>
+    	<servlet-class>servlets.ServletConvalida</servlet-class>
     </servlet>
     <servlet-mapping>
     	<servlet-name>ServletConvalida</servlet-name>
