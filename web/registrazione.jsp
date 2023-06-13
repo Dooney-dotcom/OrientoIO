@@ -3,7 +3,26 @@
 <%@ page import="java.util.Map" %>
 
 <%
-	DatabaseMock db = (DatabaseMock) this.getServletContext().getAttribute("db");	
+// 1) Caricamento del Database se non è stato caricato
+if(application.getAttribute("db") == null) {
+	DatabaseMock db = new DatabaseMock();
+	application.setAttribute("db", db);
+}
+
+// 2) Prendere il Database
+DatabaseMock db = (DatabaseMock)application.getAttribute("db");
+
+// 3) Se si è fatto il login si torna alla pagina di login che reindirizzerà alla pagina corretta
+// Attributo user contiene utente oppure studente universitario in base a "ruolo"
+// Attributo username contiene l'username
+// Questi tre attributi vanno impostati in fase di login
+if(session.getAttribute("user") != null || session.getAttribute("username") != null || session.getAttribute("ruolo") != null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
+
+// Prendo le citta dal Database
+Map<String, CittaUniversitaria> citta = db.getCitta();
 %>
 
 <!doctype html>
@@ -20,6 +39,21 @@
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
     <link rel="stylesheet" href="styles/registrazione.css">
+
+    <!-- JQuery -->
+    <script src="./scripts/libs/jquery-1.12.3.min.js"></script>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
+
+    <!-- Script -->
+    <script src="./scripts/registrazione.js" defer></script>
     
     <script>
     	function hideStudent(){
@@ -173,12 +207,12 @@
                 <div class="col-md-6 col-sm-12 mt-2">
                     <!-- input Universita -->
                     <div class="form-outline mb-4" id="Citta">
-                        <label class="form-check-label" for="Citta">Seleziona la tua Citta Universitaria:</label> </br>
-                        <select class="form-select" id="cit" name="cit" aria-label="Default select example">
+                        <label class="form-check-label" for="city">Seleziona la tua Citta Universitaria:</label> </br>
+                        <select class="form-select" id="city" name="city" aria-label="Default select example">
                             <option value="" disabled selected>Seleziona un'opzione...</option>
-                            <option value="1">Bologna</option>
-                            <option value="2">Milano</option>
-                            <option value="3">Roma</option>
+                            <% for(String c : citta.keySet()) { %>
+                                <option value="<%= c %>"><%= c %></option>
+                            <% } %>
                         </select>
                     </div>
                 </div>
@@ -193,12 +227,10 @@
                     <!-- input cittaUniversitaria -->
                     <!-- riempito dinamicamente alla scelta dell'Universita -->
                     <div class="form-outline mb-4" id="Universita">
-                        <label class="form-check-label" for="Universita">Seleziona la tua Universit�:</label> </br>
-                        <select class="form-select" id="uni" name="uni" aria-label="Default select example">
+                        <label class="form-check-label" for="Universita">Seleziona la tua Universit&agrave;:</label> </br>
+                        <select class="form-select" id="university" name="universitt" aria-label="Default select example">
                             <option value="" disabled selected>Seleziona un'opzione...</option>
-                            <option value="1">Alma Mater Studiorum-Unibo</option>
-                            <option value="2">Politecnico di Milano-PoliMi</option>
-                            <option value="3">Universit� "La Sapienza"-Roma</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -214,11 +246,9 @@
                     <!-- riempito dinamicamente alla scelta dell'Universita -->
                     <div class="form-outline mb-4" id="Corso">
                         <label class="form-check-label" for="Corso">Seleziona il tuo corso di laurea:</label> </br>
-                        <select class="form-select" id="co" name="co" aria-label="Default select example">
+                        <select class="form-select" id="course" name="course" aria-label="Default select example">
                             <option value="" disabled selected>Seleziona un'opzione...</option>
-                            <option value="1">Ingegneria Informatica</option>
-                            <option value="2">Filosofia</option>
-                            <option value="3">Medicina</option>
+
                         </select>
                     </div>
                 </div>
@@ -234,11 +264,8 @@
                     <!-- riempito dinamicamente alla scelta dell'Universita -->
                     <div class="form-outline mb-4" id="Piano">
                         <label class="form-check-label" for="Piano">Seleziona il tuo piano formativo:</label></br>
-                        <select class="form-select" id="pi" name="pi" aria-label="Default select example">
+                        <select class="form-select" id="piano" name="piano" aria-label="Default select example">
                             <option value="" disabled selected>Seleziona un'opzione...</option>
-                            <option value="1">Alma Mater Studiorum-Unibo</option>
-                            <option value="2">Politecnico di Milano-PoliMi</option>
-                            <option value="3">Universit� "La Sapienza"-Roma</option>
                         </select>
                     </div>
                 </div>

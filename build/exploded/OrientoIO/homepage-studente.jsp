@@ -51,7 +51,7 @@
     <div class="container-fluid shadow">
         <div class="row">
             <div class="col-sm-12 pt-2 pb-2 text-center">
-                <img src="images/logo-footer.png" class="img-fluid logo" alt="" width="15%">
+                <img src="./resources/logo-footer.png" class="img-fluid logo" alt="" width="15%">
             </div>
         </div>
     </div>
@@ -65,18 +65,18 @@
         </div>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h4>Esplora le funzionalit� della nostra piattaforma</h4>
+                <h4>Esplora le funzionalit&agrave; della nostra piattaforma</h4>
             </div>
         </div>
         <div class="row main-row pt-4 ps-4 pe-4">
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container rounded-top">
-                        <img class="card-img-top university-img rounded-top" src="images/university.jpg" alt="Card image cap">
+                        <img class="card-img-top university-img rounded-top" src="./resources/university.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Ricerca</h5>
-                      <p class="card-text">Ricerca tra tutti i corsi e universit&agrave; del nostro database ci� che pi� fa per te</p>
+                      <p class="card-text">Ricerca tra tutti i corsi e universit&agrave; del nostro database ci&ograve; che pi&ugrave; fa per te</p>
                       <a href="RicercaCorso.jsp" class="btn go-btn">Ricerca Corsi</a>
                       <a href="RicercaUniversita.jsp" class="btn go-btn mt-2">Ricerca Universit&agrave;</a>
                     </div>
@@ -85,7 +85,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/class.jpg" width="400px" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="./resources/class.jpg" width="400px" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Lista Preferiti</h5>
@@ -97,7 +97,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card rounded shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/exam.jpg" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="./resources/exam.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Piani Formativi</h5>
@@ -109,7 +109,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/city.jpg" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="./resources/city.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Mappa Citt&agrave;</h5>
@@ -124,7 +124,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container rounded-top">
-                        <img class="card-img-top university-img rounded-top" src="images/university.jpg" alt="Card image cap">
+                        <img class="card-img-top university-img rounded-top" src="./resources/university.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Info Citta</h5>
@@ -136,7 +136,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/class.jpg" width="400px" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="./resources/class.jpg" width="400px" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Recensione Corso</h5>
@@ -148,7 +148,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card rounded shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/exam.jpg" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="./resources/exam.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Recensione Esame</h5>
@@ -160,7 +160,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/city.jpg" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="./resources/city.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Gestione Libretto</h5>

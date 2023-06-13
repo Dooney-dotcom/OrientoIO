@@ -38,7 +38,7 @@
     <div class="container-fluid shadow">
         <div class="row">
             <div class="col-sm-12 pt-2 pb-2 text-center">
-                <img src="images/logo-footer.png" class="img-fluid logo" alt="" width="15%">
+                <img src="resources/logo-footer.png" class="img-fluid logo" alt="" width="15%">
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container rounded-top">
-                        <img class="card-img-top university-img rounded-top" src="images/university.jpg" alt="Card image cap">
+                        <img class="card-img-top university-img rounded-top" src="resources/university.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Ricerca</h5>
@@ -72,7 +72,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/class.jpg" width="400px" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="resources/class.jpg" width="400px" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Lista Preferiti</h5>
@@ -84,7 +84,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card rounded shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/exam.jpg" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="resources/exam.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Piani Formativi</h5>
@@ -96,7 +96,7 @@
             <div class="col-sm-12 col-md-3">
                 <div class="card shadow" style="width: 18rem;">
                     <div class="img-container">
-                        <img class="card-img-top rounded-top" src="images/city.jpg" alt="Card image cap">
+                        <img class="card-img-top rounded-top" src="resources/city.jpg" alt="Card image cap">
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Mappa Citt&agrave;</h5>

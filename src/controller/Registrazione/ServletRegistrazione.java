@@ -5,7 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -19,6 +21,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import model.*;
+import util.CorsoResult;
+import util.EsameResult;
+import util.PianoFormativoResult;
+import util.UniversitaResult;
 
 public class ServletRegistrazione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -48,7 +54,61 @@ public class ServletRegistrazione extends HttpServlet {
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		/* Utilizzata per restituire la lista di università e corsi in base alla città */
+
+		String c = request.getParameter("name");
+		if(c == null) {
+			response.sendRedirect("login.jsp");
+			return;
+		}
+
+		DatabaseMock db = (DatabaseMock) this.getServletContext().getAttribute("db");
+		CittaUniversitaria citta = db.getCitta().get(c);
+
+		if(citta == null) {
+			response.sendRedirect("login.jsp");
+			return;
+		}
+
+		List<Universita> universita = new ArrayList<>();
+
+		db.getUniversita().keySet().forEach(key -> {
+			if(db.getUniversita().get(key).getCitta().getNomeCitta().equals(c)) {
+				universita.add(db.getUniversita().get(key));
+			}
+		});
+
+		List<UniversitaResult> result = new ArrayList<>();
+
+		universita.forEach(u -> {
+			UniversitaResult r = new UniversitaResult();
+			r.setNome(u.getNome());
+			u.getCorsiDiLaurea().forEach(cdl -> {
+				CorsoResult cr = new CorsoResult();
+				cr.setName(cdl.getNome());
+				cdl.getPianiFormativi().forEach(pf -> {
+					PianoFormativoResult pr = new PianoFormativoResult();
+					pr.setName(pf.getAnnoImmatricolazione());
+					pf.getEsami().forEach(e -> {
+						EsameResult er = new EsameResult();
+
+						er.setNome(e.getNome());
+            			er.setAnno(e.getAnno());
+            			er.setCFU(e.getCFU());
+            			er.setLinkEsame(e.getLinkEsame());
+            			er.setPeriodo(e.getPeriodo());
+            			er.setSSD(e.getSSO());
+            			
+            			pr.getEsami().add(er);
+					});
+					cr.getPiani().add(pr);
+				});
+				r.getCorsi().add(cr);
+			});
+			result.add(r);
+		});
+
+		response.getWriter().write(gson.toJson(result));
 	}
 		
 	@Override

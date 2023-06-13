@@ -5,11 +5,6 @@ import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoPeriod;
-import java.time.chrono.Chronology;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalField;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,7 +61,6 @@ public class DatabaseMock {
 		Universita u = new Universita();
 		u.setCitta(c);
 		u.setNome("HalmaMatter");
-		
 		
 		Universita u2 = new Universita();
 		u2.setCitta(c2);
@@ -383,8 +377,8 @@ public class DatabaseMock {
 		
 		
 		//agiunta al db delle universita
-		universita.put("Bologna", u);
-		universita.put("Milano", u2);
+		universita.put(u.getNome(), u);
+		universita.put(u2.getNome(), u2);
 		
 		//aggiunta dei corsi
 		corsi.add(cdl);

@@ -59,6 +59,7 @@ public class Confronto extends HttpServlet {
          * Facciamo il prefetching mandando una lista di CorsiDiLaurea invece che di nomi
          */
         if(api.equals("university")) {
+        	System.out.println(req.getParameter("name"));
             Universita u = db.getUniversita().get(req.getParameter("name"));
             List<CorsoResult> result = new ArrayList<>();
             
