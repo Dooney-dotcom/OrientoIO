@@ -50,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h4>Esplora le funzionalit� della nostra piattaforma</h4>
+                <h4>Esplora le funzionalit&agrave; della nostra piattaforma</h4>
             </div>
         </div>
         <div class="row main-row pt-4 ps-4 pe-4">
@@ -88,7 +88,7 @@
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>� 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6><i class="bi bi-c-circle"></i> 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>
