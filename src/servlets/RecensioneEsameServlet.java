@@ -110,7 +110,9 @@ public class RecensioneEsameServlet extends HttpServlet{
                 break;
             }
         }
-
+        
+        Esame esame = null;
+        
         if(review == null) {
             review = new RecensioneEsame();
             review.setStudente(s);
@@ -118,6 +120,7 @@ public class RecensioneEsameServlet extends HttpServlet{
             //! Bisogna settare l'esame. Lo cerco nel piano formativo
             for (Esame e : s.getPianoFormativo().getEsami()) {
                 if(e.getNome().equals(exam)) {
+                	esame = e;
                     review.setEsame(e);
                     break;
                 }
@@ -125,6 +128,11 @@ public class RecensioneEsameServlet extends HttpServlet{
         }
 
         db.getRecensioniEsami().add(review);
+        
+        System.out.println(db.getRecensioniEsami());
+        
+        esame.getRecensioni().add(review);
+        this.getServletContext().setAttribute("db", db);
 
         String voto = request.getParameter("voto");
         String recensione = request.getParameter("review");

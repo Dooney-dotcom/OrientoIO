@@ -37,9 +37,8 @@ String ruolo = (String) session.getAttribute("ruolo");
 String username = (String) session.getAttribute("username");
 
 if(!ruolo.equals("studente") || (ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione()!=null )) {
-	if(((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)) {
-		response.sendRedirect("./login.jsp");
-		return;
+	if(((StudenteUniversitario) session.getAttribute("user")).getRestrizione() != null &&((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)) {
+		// non esiste piu il ban per questa pagina
 	}
 } else {
 		if(ruolo.equals("studente") && (ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione()!=null )){ 

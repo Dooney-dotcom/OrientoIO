@@ -1,6 +1,7 @@
-package servlets;
+package controller.InfoCitta;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -25,11 +26,23 @@ public class ServletLuoghiPreferiti extends HttpServlet{
 		
 		InformazioniCitta info = (InformazioniCitta) request.getSession().getAttribute("info");
 		
+		List<LuogoPreferito> luoghi = info.getListaLuoghiPreferiti();
+		
 		if(nomeLuogo != null){
-			LuogoPreferito l = new LuogoPreferito();
-			l.setNomeLuogo(nomeLuogo);
 			
-			info.aggiungiLuogoPreferito(l);
+			//Controlla se non esiste già un altro luogo con questo nome
+			boolean trovato = false;
+			for(LuogoPreferito lp: luoghi) {
+				if(lp.getNomeLuogo().equals(nomeLuogo)) {
+					trovato = true;
+				}
+			}
+			
+			if(!trovato) {
+				LuogoPreferito l = new LuogoPreferito();
+				l.setNomeLuogo(nomeLuogo);
+				info.aggiungiLuogoPreferito(l);
+			}
 		}
 		
 		request.getSession().setAttribute("info", info);

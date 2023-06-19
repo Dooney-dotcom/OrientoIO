@@ -6,6 +6,33 @@ if(this.getServletContext().getAttribute("db") == null) {
 	DatabaseMock database = new DatabaseMock();
 	this.getServletContext().setAttribute("db", database);
 }
+
+if(request.getSession().getAttribute("user") != null && request.getSession().getAttribute("ruolo") != null && request.getSession().getAttribute("username") != null){
+	if(request.getSession().getAttribute("ruolo").equals("studente")){
+		response.sendRedirect("homepage-studente.jsp");
+	}
+	if(request.getSession().getAttribute("ruolo").equals("utente")){
+		response.sendRedirect("homepage-utente.jsp");
+	}
+	if(request.getSession().getAttribute("ruolo").equals("amministratore")){
+		response.sendRedirect("HomeAmministratore.jsp");
+	}
+}
+
+String loginError = "";
+if(request.getSession().getAttribute("errorLogin") != null){
+	loginError = (String)request.getSession().getAttribute("errorLogin");
+}
+
+int tentativi = 0;
+if(request.getSession().getAttribute("tentativi") == null){
+	request.getSession().setAttribute("tentativi", tentativi);
+}else{
+	tentativi = (Integer) request.getSession().getAttribute("tentativi");
+	if(tentativi >= 3){
+		response.sendRedirect("retry.html");
+	}
+}
 %>
 
 
@@ -56,6 +83,9 @@ if(this.getServletContext().getAttribute("db") == null) {
                         <h2 class="text-center pt-2 mb-4">Benvenuto su OrientoIO!</h2>
 
                         <hr>
+                        
+                        <p class="text-center pt-2" style="color:red;"><i><%=loginError%></i></p>
+            
 
                         <div class="form-outline mt-2 mb-2 pb-2">
                           <input type="text" id="username" name="username" class="form-control" placeholder="Username" />

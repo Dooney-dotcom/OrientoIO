@@ -21,6 +21,12 @@ if(session.getAttribute("user") != null || session.getAttribute("username") != n
     return;
 }
 
+String errore = "";
+//Controllo errore
+if(request.getSession().getAttribute("errore") != null){
+	errore = (String) request.getSession().getAttribute("errore"); 
+}
+
 // Prendo le citta dal Database
 Map<String, CittaUniversitaria> citta = db.getCitta();
 %>
@@ -127,6 +133,12 @@ Map<String, CittaUniversitaria> citta = db.getCitta();
 
                 <div class="col-md-3 col-sm-12"></div>
             </div>
+            
+            <div class="row">
+            	<div class="col-sm-12">
+            		<p class="text-center pt-2" style="color:red;"><i><%=errore%></i></p>
+            	</div>
+            </div>
 
             <div class="row">
                 <div class="col-md-3 col-sm-12"></div>
@@ -228,7 +240,7 @@ Map<String, CittaUniversitaria> citta = db.getCitta();
                     <!-- riempito dinamicamente alla scelta dell'Universita -->
                     <div class="form-outline mb-4" id="Universita">
                         <label class="form-check-label" for="Universita">Seleziona la tua Universit&agrave;:</label> </br>
-                        <select class="form-select" id="university" name="universitt" aria-label="Default select example">
+                        <select class="form-select" id="university" name="university" aria-label="Default select example">
                             <option value="" disabled selected>Seleziona un'opzione...</option>
                             
                         </select>

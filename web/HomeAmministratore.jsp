@@ -64,7 +64,7 @@
                       <h5 class="card-title">Gestione Utenti</h5>
                       <p class="card-text">Verifica e modifica lo stato degli utenti!</p>
                       <a href="<%= request.getContextPath() %>/gestione-utenti.jsp" class="btn go-btn">Vai a Gestione Utenti</a>
-                      <a href="<%= request.getContextPath() %>/segnalazioni.jsp" class="btn go-btn mt-2">Visualizza Segnalazioni</a>
+                      <a href="<%= request.getContextPath() %>/segnalazioni.jsp" class="btn go-btn mt-2">Visualizza le Segnalazioni</a>
                     </div>
                 </div>
             </div>

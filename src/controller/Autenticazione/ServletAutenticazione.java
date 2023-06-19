@@ -46,9 +46,11 @@ private static final long serialVersionUID = 1L;
 						request.getSession().setAttribute("ruolo", "amministratore");
 						this.getServletContext().getRequestDispatcher("/HomeAmministratore.jsp").forward(request, response);
 					}else {
+						request.getSession().setAttribute("errorLogin", "Password sbagliata. Riprova.");
 						this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 					}
 				}else {
+					request.getSession().setAttribute("errorLogin", "Username sbagliato. Riprova.");
 					this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 				}
 			}else {
@@ -70,9 +72,11 @@ private static final long serialVersionUID = 1L;
 							this.getServletContext().getRequestDispatcher("/homepage-utente.jsp").forward(request, response);
 						}
 					}else {
+						request.getSession().setAttribute("errorLogin", "Password sbagliata. Riprova.");
 						this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 					}
 				}else {
+					request.getSession().setAttribute("errorLogin", "Username sbagliato. Riprova.");
 					this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 				}
 			}

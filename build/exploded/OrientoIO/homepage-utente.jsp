@@ -63,7 +63,7 @@
                     </div>
                     <div class="card-body rounded-bottom">
                       <h5 class="card-title">Ricerca</h5>
-                      <p class="card-text">Ricerca tra tutti i corsi e universit&agrave; del nostro database ci� che pi� fa per te</p>
+                      <p class="card-text">Ricerca tra tutti i corsi e universit&agrave; del nostro database ci&ograve; che pi&ugrave; fa per te</p>
                       <a href="RicercaCorso.jsp" class="btn go-btn">Ricerca Corsi</a>
                       <a href="RicercaUniversita.jsp" class="btn go-btn mt-2">Ricerca Universit&agrave;</a>
                     </div>
@@ -112,7 +112,7 @@
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>� 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6><i class="bi bi-c-circle"></i> 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

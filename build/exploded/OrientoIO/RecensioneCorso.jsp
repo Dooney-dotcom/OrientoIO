@@ -37,9 +37,8 @@ String ruolo = (String) session.getAttribute("ruolo");
 String username = (String) session.getAttribute("username");
 
 if(!ruolo.equals("studente") || (ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione()!=null )) {
-	if(((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)) {
-		response.sendRedirect("./login.jsp");
-		return;
+	if(((StudenteUniversitario) session.getAttribute("user")).getRestrizione() != null &&((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)) {
+		// non esiste piu il ban per questa pagina
 	}
 } else {
 		if(ruolo.equals("studente") && (ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione()!=null )){ 
@@ -326,7 +325,7 @@ RecensioneCorso rc = s.getRecensioneCorso();
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>� 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6><i class="bi bi-c-circle"></i> 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

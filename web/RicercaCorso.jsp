@@ -11,13 +11,6 @@ if(application.getAttribute("db") == null){
 
 DatabaseMock db = (DatabaseMock) application.getAttribute("db");
 
-//questi righi vanno eliminati perchï¿½ servono solo per il controllo della jsp
-Utente u = db.getUtenti().get("LucaB"); 
-session.setAttribute("user", u); 
-session.setAttribute("ruolo", "utente");
-session.setAttribute("username", "LucaB");
-//
-
 if(session.getAttribute("user") == null || session.getAttribute("ruolo") == null || session.getAttribute("username") == null) {
 	response.sendRedirect("login.jsp");
 	return;
@@ -28,9 +21,6 @@ String username = (String) session.getAttribute("username");
 
 if(ruolo.equals("amministratore")) {
 	response.sendRedirect("HomeAmministratore.jsp");
-	return;
-} else if(ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)){ 
-	response.sendRedirect("./login.jsp");
 	return;
 }else{
 
@@ -444,10 +434,10 @@ if(ruolo.equals("amministratore")) {
                                           Testo recensione
                                       </div>
                                       <div class="col-md-1 text-start">
-                                          Qualità dell'insegnamento
+                                          Qualitï¿½ dell'insegnamento
                                       </div>
                                       <div class="col-md-2 text-start">
-                                          Opportunità offerte
+                                          Opportunitï¿½ offerte
                                       </div>
                                       <div class="col-md-2 text-start">
                                           Sbocchi lavorativi
