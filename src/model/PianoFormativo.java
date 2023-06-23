@@ -45,6 +45,13 @@ public class PianoFormativo {
 		this.esami.add(esame);
 	}
 
+
+	@Override
+	public String toString() {
+		return "PianoFormativo [esami=" + esami + ", corso=" + corso.getNome() + ", annoImmatricolazione=" + annoImmatricolazione
+				+ "]";
+	}
+
 	
 	
 	

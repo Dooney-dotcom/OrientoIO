@@ -57,7 +57,9 @@
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     
-    <script src="./script/jquery-1.12.3.min.js"></script>
+    <script src="./scripts/libs/jquery-1.12.3.min.js"></script>
+
+    <script src="./scripts/info-citta.js" defer></script>
 </head>
 
 <body>
@@ -101,7 +103,7 @@
                     <label class="form-check-label" for="luoghi">Ecco i luoghi di interesse/preferiti inseriti fin'ora:</label> </br>
                     <ul class="list-unstyled">
                     <%
-                    	if(info.getListaLuoghiPreferiti() != null){
+                    	if(info != null && info.getListaLuoghiPreferiti() != null){
                     		for(LuogoPreferito l: info.getListaLuoghiPreferiti()){
                     			if(!l.getNomeLuogo().isBlank() || !l.getNomeLuogo().isEmpty())
                     			%>
@@ -156,60 +158,32 @@
                 
                 <span class="field-label-info"></span>
 
-                <input type="hidden" id="selected_rating" name="selected_rating" value="" required="required">
+                <input type="hidden" id="selected_rating_mezzi" name="selected_rating_mezzi" value="" required="required">
                 
                 <h2 class="bold rating-header">
 
-                <span class="selected-rating">0</span> <small> / 5</small></h2>
+                <span class="selected-rating-mezzi">0</span> <small> / 5</small></h2>
 
-                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
+                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="1" id="rating-star-mezzi1">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="2" id="rating-star-2">
+                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="2" id="rating-star-mezzi2">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="3" id="rating-star-3">
+                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="3" id="rating-star-mezzi3">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="4" id="rating-star-4">
+                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="4" id="rating-star-mezzi4">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5">
+                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="5" id="rating-star-mezzi5">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
         </div>
-
-        <script>
-            jQuery(document).ready(function($){
-
-                $(".btnrating").on('click',(function(e) {
-                
-                var previous_value = $("#selected_rating").val();
-                
-                var selected_value = $(this).attr("data-attr");
-                $("#selected_rating").val(selected_value);
-                
-                $(".selected-rating").empty();
-                $(".selected-rating").html(selected_value);
-                
-                for (i = 1; i <= selected_value; ++i) {
-                $("#rating-star-"+i).toggleClass('star-selected');
-                $("#rating-star-"+i).toggleClass('star-default');
-                }
-                
-                for (ix = 1; ix <= previous_value; ++ix) {
-                $("#rating-star-"+ix).toggleClass('star-selected');
-                $("#rating-star-"+ix).toggleClass('star-default');
-                }
-                
-                }));
-                
-            });
-        </script>
 
             <!-- livello culturale -->
             <div class="col-md-5 col-sm-12 text-end justify-content-end">
@@ -217,60 +191,32 @@
                     
                     <span class="field-label-info"></span>
 
-                    <input type="hidden" id="selected_rating2" name="selected_rating2" value="" required="required">
+                    <input type="hidden" id="selected_rating_cultura" name="selected_rating_cultura" value="" required="required">
                     
                     <h2 class="bold rating-header">
 
-                    <span class="selected-rating2">0</span> <small> / 5</small> </h2>
+                    <span class="selected-rating-cultura">0</span> <small> / 5</small> </h2>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="1" id="rating-star-2-1">
+                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="1" id="rating-star-cultura-1">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="2" id="rating-star-2-2">
+                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="2" id="rating-star-cultura-2">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="3" id="rating-star-2-3">
+                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="3" id="rating-star-cultura-3">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="4" id="rating-star-2-4">
+                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="4" id="rating-star-cultura-4">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="5" id="rating-star-2-5">
+                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="5" id="rating-star-cultura-5">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
             </div>
-
-            <script>
-                jQuery(document).ready(function($){
-
-                    $(".btnrating2").on('click',(function(e) {
-                    
-                    var previous_value2 = $("#selected_rating2").val();
-                    
-                    var selected_value2 = $(this).attr("data-attr");
-                    $("#selected_rating2").val(selected_value2);
-                    
-                    $(".selected-rating2").empty();
-                    $(".selected-rating2").html(selected_value2);
-                    
-                    for (i = 1; i <= selected_value2; ++i) {
-                    $("#rating-star-2-"+i).toggleClass('star-selected');
-                    $("#rating-star-2-"+i).toggleClass('star-default');
-                    }
-                    
-                    for (ix = 1; ix <= previous_value2; ++ix) {
-                    $("#rating-star-2-"+ix).toggleClass('star-selected');
-                    $("#rating-star-2-"+ix).toggleClass('star-default');
-                    }
-                    
-                    }));
-                    
-                });
-            </script>
 
             <div class="col-md-1 col-sm-12"></div>
         </div>

@@ -74,5 +74,12 @@ public class Esame {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Esame [recensioni=" + recensioni + ", nome=" + nome + ", SSO=" + SSO + ", CFU=" + CFU + ", periodo="
+				+ periodo + ", anno=" + anno + ", linkEsame=" + linkEsame + "]";
+	}
+	
+	
 	
 }

@@ -2,13 +2,21 @@ package model;
 
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import db.DataSource;
 
 public class DatabaseMock {
 	private Map<String, Account> accounts; //tutti gli account del sito (amministratori, utenti, studenti)
@@ -23,6 +31,8 @@ public class DatabaseMock {
 	private List<SegnalazioneRecensioneCorso> segnalazioniCorso;
 	private List<RecensioneEsame> recensioniEsami;
 	private List<SegnalazioneRecensioneEsame> segnalazioniEsami;
+	private List<PianoFormativo> pianiFormativi;
+	
 	//Alessandro
 	private List<InformazioniCitta> infoCitta;
 	
@@ -39,119 +49,201 @@ public class DatabaseMock {
 		this.segnalazioniCorso = new ArrayList<>();
 		this.recensioniEsami = new ArrayList<>();
 		this.segnalazioniEsami = new ArrayList<>();
+		this.pianiFormativi = new ArrayList<>();
 		//
 		
 		this.infoCitta = new ArrayList<>();
 		
 		
-		//creazione citta
-		CittaUniversitaria c = new CittaUniversitaria();
-		c.setNomeCitta("Bologna");
-		c.setFotoCitta(new File("../web/resources/bologna.jpg"));
+		/*
+		 * Get delle Citta da DB
+		 */
 		
-		CittaUniversitaria c2 = new CittaUniversitaria();
-		c2.setNomeCitta("Milano");
-		c.setFotoCitta(new File("../web/resources/milano.jpg"));
+		try {
+			DataSource dataSource = new DataSource(DataSource.DB2);
+			Connection connection = dataSource.getConnection();
+			
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM CITTA_UNIVERSITARIE");
+			ResultSet rs = statement.executeQuery();
+			
+			while(rs.next()) {
+				CittaUniversitaria c = new CittaUniversitaria();
+				c.setNomeCitta(rs.getString("NOME"));
+				c.setFotoCitta(new File(""));
+				
+				System.out.println(c);
+				
+				this.citta.put(c.getNomeCitta(), c);
+			}
+			
+			rs.close();
+			statement.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		CittaUniversitaria c3 = new CittaUniversitaria();
-		c3.setNomeCitta("Roma");
-		c.setFotoCitta(new File("../web/resources/roma.jpg"));
+		/*
+		 * Get delle università da DB
+		 */
+		try {
+			DataSource dataSource = new DataSource(DataSource.DB2);
+			Connection connection = dataSource.getConnection();
+			
+			PreparedStatement statement = connection.prepareStatement("SELECT u.*, c.nome as NOMECITTA "
+					+ "FROM UNIVERSITA u "
+					+ "JOIN CITTA_UNIVERSITARIE c "
+					+ "ON c.ID = u.IDCITTAUNIVERSITARIA ");
+			ResultSet rs = statement.executeQuery();
+			
+			while(rs.next()) {
+				Universita u = new Universita();
+				u.setNome(rs.getString("NOME"));
+				u.setLinkBorsaDiStudio("linkBorsaDiStudio");
+				u.setLinkUniversita(rs.getString("linkUniversita"));
+				
+				CittaUniversitaria c = this.citta.get(rs.getString("NOMECITTA"));
+				
+				u.setCitta(c);
+				
+				System.out.println(u);
+				
+				this.universita.put(u.getNome(), u);
+			}
+			
+			rs.close();
+			statement.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		//creazione universita
-		Universita u = new Universita();
-		u.setCitta(c);
-		u.setNome("HalmaMatter");
+		/*
+		 * GET dei corsi da DB
+		 */
 		
-		Universita u2 = new Universita();
-		u2.setCitta(c2);
-		u2.setNome("Politecnico di Milano");
+		try {
+			DataSource dataSource = new DataSource(DataSource.DB2);
+			Connection connection = dataSource.getConnection();
+			
+			PreparedStatement statement = connection.prepareStatement("SELECT c.*, u.nome as UNIVERSITA "
+					+ "FROM UNIVERSITA u "
+					+ "JOIN CORSI c "
+					+ "ON c.IDUNIVERSITA = u.ID ");
+			ResultSet rs = statement.executeQuery();
+			
+			
+			/*
+			 * CREATE TABLE CORSI (
+	ID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1), 
+	nome varchar(300) NOT NULL, 
+	coordinatore varchar(300) NOT NULL, 
+	dipartimento varchar(50) NOT NULL, 
+	tipo varchar(50) NOT NULL, 
+	lingua varchar(50) NOT NULL, 
+	accesso varchar (100) NOT NULL, 
+	link varchar(300) NOT NULL,
+	classeDiCorso varchar(50) NOT NULL, 
+	idUniversita int NOT NULL REFERENCES UNIVERSITA(ID)
+);
+			 */
+			
+			while(rs.next()) {
+				CorsoDiLaurea c = new CorsoDiLaurea();
+				c.setNome(rs.getString("NOME"));
+				c.setCoordinatore(rs.getString("COORDINATORE"));
+				c.setDipartimento(rs.getString("DIPARTIMENTO"));
+				c.setTipo(TipoCorso.valueOf(rs.getString("TIPO")));
+				c.setLingua(rs.getString("LINGUA"));
+				c.setAccesso(rs.getString("ACCESSO"));
+				c.setLinkCorso(rs.getString("LINK"));
+				c.setClasseDiCorso(rs.getString("CLASSEDICORSO"));
+				
+				Universita u = this.universita.get(rs.getString("UNIVERSITA"));
+				c.setUniversita(u);
+				u.getCorsiDiLaurea().add(c);
+				this.corsi.add(c);
+				
+				System.out.println(c);
+			}
+			
+			rs.close();
+			statement.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		/*
+		 * GET dei piani formativi da Database
+		 */
+		try {
+			DataSource dataSource = new DataSource(DataSource.DB2);
+			Connection connection = dataSource.getConnection();
+			
+			PreparedStatement statement = connection.prepareStatement("SELECT p.* "
+					+ "FROM PIANI_FORMATIVI p "
+					+ "JOIN CORSI c "
+					+ "ON c.ID = p.ID_CORSO ");
+			ResultSet rs = statement.executeQuery();
+			
+			while(rs.next()) {
+				PianoFormativo p = new PianoFormativo();
+				p.setAnnoImmatricolazione(rs.getString("ANNOIMMATRICOLAZIONE"));
+				
+				CorsoDiLaurea c = this.corsi.get(rs.getInt("ID_CORSO") - 1);
+				p.setCorso(c);
+				c.getPianiFormativi().add(p);
+				
+				this.pianiFormativi.add(p);
+				
+				System.out.println(p);
+			}
+			
+			rs.close();
+			statement.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		
-		//creazione corsi di laurea
-		CorsoDiLaurea cdl = new CorsoDiLaurea();
-		cdl.setNome("Ingegneria informatica T");
-		cdl.setTipo(TipoCorso.TRIENNALE);
-		cdl.setAccesso("TOLC-I");
-		cdl.setClasseDiCorso("ING-INF");
-		cdl.setCoordinatore("Enrico Denti");
-		cdl.setDipartimento("DISI");
-		cdl.setLinkCorso("https://corsi.unibo.it/laurea/IngegneriaInformatica");
-		cdl.setLingua("Italiano");
 		
-		cdl.setUniversita(u);
-		u.aggiungiCorsoDiLaurea(cdl);
-		
-		CorsoDiLaurea cdl2 = new CorsoDiLaurea();
-		cdl2.setNome("Ingengeria aereospaziale");
-		cdl2.setTipo(TipoCorso.TRIENNALE);
-		cdl2.setAccesso("TOLC-I");
-		cdl2.setClasseDiCorso("L-9-INGEGNERIA INDUSTRIALE");
-		cdl2.setCoordinatore("Fabrizio Giulietti");
-		cdl2.setDipartimento("DIN");
-		cdl2.setLinkCorso("https://corsi.unibo.it/laurea/IngegneriaAerospaziale");
-		cdl2.setLingua("Italiano");
-		
-		cdl2.setUniversita(u);
-		u.aggiungiCorsoDiLaurea(cdl2);
-		
-		CorsoDiLaurea cdl3 = new CorsoDiLaurea();
-		cdl3.setNome("Fisica");
-		cdl3.setTipo(TipoCorso.TRIENNALE);
-		cdl3.setAccesso("Accesso Libero con test di autovalutazione obbligatorio prima dell'immatricolazione");
-		cdl3.setClasseDiCorso(" ");
-		cdl3.setCoordinatore("Guglielmetti Alessandra Ada Cecilia");
-		cdl3.setDipartimento(" ");
-		cdl3.setLinkCorso("https://www.unimi.it/it/corsi/laurea-triennale/fisica");
-		cdl3.setLingua("Italiano");
-		
-		cdl3.setUniversita(u2);
-		u2.aggiungiCorsoDiLaurea(cdl3);
+		/*
+		 * Get degli esami dal DB per fare prima
+		 */
+		try {
+			DataSource dataSource = new DataSource(DataSource.DB2);
+			Connection connection = dataSource.getConnection();
+			
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT e.*, p.ID AS ID_PIANO from esami e join piani_formativi p on e.idPianoFormativo = p.id");
+			
+			while(rs.next()) {
+				Esame e = new Esame();
+				e.setNome(rs.getString("NOME"));
+				e.setSSO(rs.getString("SSD"));
+				e.setCFU(rs.getInt("CFU"));
+				e.setPeriodo(rs.getInt("PERIODO"));
+				e.setAnno(rs.getInt("ANNO"));
+				e.setLinkEsame(rs.getString("LINKESAME"));
+				
+				PianoFormativo p = pianiFormativi.get(rs.getInt("ID_PIANO") - 1);
+				
+				p.getEsami().add(e);
+				Collections.sort(p.getEsami(), Comparator.comparingInt(Esame::getAnno).thenComparingInt(Esame::getPeriodo).thenComparingInt(Esame::getCFU).thenComparing(Esame::getNome));
+				
+				System.out.println(e);
+			}
+			
+			rs.close();
+			statement.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		
-		CorsoDiLaurea cdl4 = new CorsoDiLaurea();
-		cdl4.setNome("Ingegneria informatica T");
-		cdl4.setTipo(TipoCorso.TRIENNALE);
-		cdl4.setAccesso("TOLC-I");
-		cdl4.setClasseDiCorso("ING-INF");
-		cdl4.setCoordinatore("Gemitaiz");
-		cdl4.setDipartimento("DISI");
-		cdl4.setLinkCorso("linkCorso");
-		cdl4.setLingua("Romano");
-		
-		cdl4.setUniversita(u2);
-		u2.aggiungiCorsoDiLaurea(cdl4);
-		
-		//creazione piani formativi
-		PianoFormativo pianoFormativo = new PianoFormativo();
-		pianoFormativo.setCorso(cdl);
-		pianoFormativo.setAnnoImmatricolazione("2020/2021");
-		
-		cdl.aggiungiPianoFormativo(pianoFormativo);
-		
-		PianoFormativo pianoFormativo2 = new PianoFormativo();
-		pianoFormativo2.setCorso(cdl);
-		pianoFormativo2.setAnnoImmatricolazione("2021/2022");
-		
-		cdl.aggiungiPianoFormativo(pianoFormativo2);
-
-		PianoFormativo pianoFormativo3 = new PianoFormativo();
-		pianoFormativo3.setCorso(cdl2);
-		pianoFormativo3.setAnnoImmatricolazione("2021/2022");
-		
-		cdl2.aggiungiPianoFormativo(pianoFormativo3);
-		
-		PianoFormativo pianoFormativo4 = new PianoFormativo();
-		pianoFormativo4.setCorso(cdl3);
-		pianoFormativo4.setAnnoImmatricolazione("2021/2022");
-		
-		cdl3.aggiungiPianoFormativo(pianoFormativo4);
-		
-		
-		PianoFormativo pianoFormativo5 = new PianoFormativo();
-		pianoFormativo5.setCorso(cdl4);
-		pianoFormativo5.setAnnoImmatricolazione("2022/2023");
-		
-		cdl4.aggiungiPianoFormativo(pianoFormativo5);
 		
 		//creazione esami
 		Esame esame = new Esame();
@@ -162,7 +254,7 @@ public class DatabaseMock {
 		esame.setPeriodo(1);
 		esame.setSSO(" ");
 		
-		pianoFormativo.aggiungiEsame(esame);
+		//pianoFormativo.aggiungiEsame(esame);
 		
 		
 		Esame esame2 = new Esame();
@@ -173,7 +265,7 @@ public class DatabaseMock {
 		esame2.setPeriodo(1);
 		esame2.setSSO("CHIM/07");
 		
-		pianoFormativo3.aggiungiEsame(esame2);
+		//pianoFormativo3.aggiungiEsame(esame2);
 		
 		
 		Esame esame3 = new Esame();
@@ -184,7 +276,7 @@ public class DatabaseMock {
 		esame3.setPeriodo(1);
 		esame3.setSSO("MAT/03");
 		
-		pianoFormativo2.aggiungiEsame(esame3);
+		//pianoFormativo2.aggiungiEsame(esame3);
 		
 		Esame esame4 = new Esame();
 		esame4.setNome("Laboratorio di fisica con elementi di statistica");
@@ -194,7 +286,7 @@ public class DatabaseMock {
 		esame4.setPeriodo(1);
 		esame4.setSSO("FIS/01");
 		
-		pianoFormativo3.aggiungiEsame(esame4);
+		//pianoFormativo3.aggiungiEsame(esame4);
 		
 		Esame esame5 = new Esame();
 		esame5.setNome("Reti Logiche");
@@ -204,7 +296,7 @@ public class DatabaseMock {
 		esame5.setPeriodo(1);
 		esame5.setSSO("ING-INF/05");
 		
-		pianoFormativo.aggiungiEsame(esame5);
+		//pianoFormativo.aggiungiEsame(esame5);
 		
 		
 		Esame esame6 = new Esame();
@@ -215,7 +307,7 @@ public class DatabaseMock {
 		esame6.setPeriodo(1);
 		esame6.setSSO("ING-RAP/01");
 		
-		pianoFormativo5.aggiungiEsame(esame6);
+		//pianoFormativo5.aggiungiEsame(esame6);
 		
 		
 		//creazione amministratori
@@ -246,21 +338,21 @@ public class DatabaseMock {
 		studente.setUsername("mandarino87");
 		studente.setNome("Mario");
 		studente.setCognome("Rossi");
-		studente.setPianoFormativo(pianoFormativo);
-		studente.setCitta(c);
+		studente.setPianoFormativo(this.pianiFormativi.get(0));
+		studente.setCitta(this.citta.get("Bologna"));
 		studente.setLibretto(new Libretto());
 		
-		c.getStudenti().add(studente);
+		this.citta.get("Bologna").getStudenti().add(studente);
 		
 		StudenteUniversitario studente2 = new StudenteUniversitario();
 		studente2.setUsername("MadMan");
 		studente2.setNome("PierFrancesco");
 		studente2.setCognome("Botrugno");
-		studente2.setPianoFormativo(pianoFormativo2);
-		studente2.setCitta(c);
+		studente2.setPianoFormativo(this.pianiFormativi.get(1));
+		studente2.setCitta(this.citta.get("Bologna"));
 		studente2.setLibretto(new Libretto());
 		
-		c.getStudenti().add(studente2);
+		this.citta.get("Bologna").getStudenti().add(studente2);
 		
 		
 		//creazione account
@@ -297,27 +389,27 @@ public class DatabaseMock {
 		
 		//creazione recensioni corso
 		RecensioneCorso r = new RecensioneCorso();
-		r.setCorso(cdl);
+		r.setCorso(this.corsi.get(0));
 		r.setTestoRecensione("Corso molto bello, lo consiglio");
 		r.setOpportunitaOfferte("offre opportunità in ambito informatico");
 		r.setQualitaInsegnamento(5);
 		r.setSbocchiLavorativi("bidello");
 		r.setStudente(studente);
-		r.setCorso(cdl);
+		r.setCorso(this.corsi.get(0));
 		
-		cdl.getRecensioni().add(r);
+		this.corsi.get(0).getRecensioni().add(r);
 		studente.setRecensioneCorso(r);
 		
 		RecensioneCorso r2 = new RecensioneCorso();
-		r2.setCorso(cdl);
+		r2.setCorso(this.corsi.get(0));
 		r2.setTestoRecensione("Corsobrutto");
 		r2.setOpportunitaOfferte("offre poco");
 		r2.setQualitaInsegnamento(1);
 		r2.setSbocchiLavorativi("bho");
 		r2.setStudente(studente2);
-		r2.setCorso(cdl);
+		r2.setCorso(this.corsi.get(0));
 		
-		cdl.getRecensioni().add(r2);
+		this.corsi.get(0).getRecensioni().add(r2);
 		studente2.setRecensioneCorso(r2);
 		
 		
@@ -374,22 +466,6 @@ public class DatabaseMock {
 		
 		sre.setUtenteSegnalante(utente2);
 		sre.setRecensioneSegnalata(re);
-		
-		
-		//agiunta al db delle universita
-		universita.put(u.getNome(), u);
-		universita.put(u2.getNome(), u2);
-		
-		//aggiunta dei corsi
-		corsi.add(cdl);
-		corsi.add(cdl2);
-		corsi.add(cdl3);
-		corsi.add(cdl4);
-		
-		//aggiunta al db delle citta
-		citta.put(c.getNomeCitta(), c);
-		citta.put(c2.getNomeCitta(), c2);
-		citta.put(c3.getNomeCitta(), c3);
 		
 		//aggiunta al db degli account
 		accounts.put(studente.getUsername(), a);

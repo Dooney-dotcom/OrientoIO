@@ -109,5 +109,16 @@ public class CorsoDiLaurea {
 	public void setRecensioni(List<RecensioneCorso> recensioni) {
 		this.recensioni = recensioni;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "CorsoDiLaurea [pianiFormativi=" + pianiFormativi + ", universita=" + universita.getNome() + ", tipo=" + tipo
+				+ ", recensioni=" + recensioni + ", nome=" + nome + ", coordinatore=" + coordinatore + ", dipartimento="
+				+ dipartimento + ", lingua=" + lingua + ", accesso=" + accesso + ", linkCorso=" + linkCorso
+				+ ", classeDiCorso=" + classeDiCorso + "]";
+	}
+	
 	
 }

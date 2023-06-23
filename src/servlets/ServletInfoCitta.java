@@ -23,11 +23,18 @@ public class ServletInfoCitta extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String tipo = request.getParameter("abitazione");
 		String costo = request.getParameter("affitto");
-		String mezzi = request.getParameter("mezzi");
-		String cultura = request.getParameter("cultura");
+		String mezzi = request.getParameter("selected_rating_mezzi");
+		String cultura = request.getParameter("selected_rating_cultura");
 		String recensione = request.getParameter("recensione");
 		
-		InformazioniCitta info = (InformazioniCitta) request.getSession().getAttribute("info");
+		InformazioniCitta info = null;
+		
+		if(request.getSession().getAttribute("info") != null) {
+			info = (InformazioniCitta) request.getSession().getAttribute("info");
+		}else {
+			info = new InformazioniCitta();
+		}
+		
 		
 		if(!tipo.equals("") && tipo != null && !costo.equals("") && costo != null
 				&& !mezzi.equals("") && mezzi != null && !cultura.equals("") &&

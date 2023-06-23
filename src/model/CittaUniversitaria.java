@@ -44,4 +44,12 @@ public class CittaUniversitaria{
     public boolean addStudente(StudenteUniversitario studente){
         return this.studenti.add(studente);
     }
+
+	@Override
+	public String toString() {
+		return "CittaUniversitaria [nomeCitta=" + nomeCitta + ", fotoCitta=" + fotoCitta + ", studenti=" + studenti
+				+ "]";
+	}
+    
+    
 }

@@ -90,6 +90,20 @@ public class RecensioneCorsoServlet extends HttpServlet{
     		s.setRecensioneCorso(rc);
     		request.getSession().setAttribute("user", s);
     		
+    		//modifichiamo la recensione all'interno della lista corsi del db
+    	      for(CorsoDiLaurea corso: db.getCorsi()){
+    	        if(corso.getNome().equals(rc.getCorso().getNome()) && corso.getUniversita().getNome().equals(rc.getCorso().getUniversita().getNome())){ //una volta trovato il mio corso
+    	          for(RecensioneCorso r : corso.getRecensioni()) {
+    	            if(r.getStudente().getUsername().equals(s.getUsername())){ //e una volta trovata la mia recensione (se esiste)
+    	              corso.getRecensioni().remove(r);  //la elimino
+    	              break;  
+    	            }
+    	          }
+    	          corso.getRecensioni().add(rc); //ora aggiungiamo la recensione che se esisteva abbiamo rimosso sopra
+    	          break;
+    	        }
+    	      }
+    		
         	result.setMessage("ok");
         	result.setTestoRecensione(recensione.getTestoRecensione());
         	result.setOpportunitaOfferte(recensione.getOpportunitaOfferte());

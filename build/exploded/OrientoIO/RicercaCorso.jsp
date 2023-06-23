@@ -434,10 +434,10 @@ if(ruolo.equals("amministratore")) {
                                           Testo recensione
                                       </div>
                                       <div class="col-md-1 text-start">
-                                          Qualit� dell'insegnamento
+                                          Qualit&agrave; dell'insegnamento
                                       </div>
                                       <div class="col-md-2 text-start">
-                                          Opportunit� offerte
+                                          Opportunit&agrave; offerte
                                       </div>
                                       <div class="col-md-2 text-start">
                                           Sbocchi lavorativi
@@ -497,7 +497,7 @@ if(ruolo.equals("amministratore")) {
         <div class="container-fluid">
             <div class="row py-2">
                 <div class="col-sm-12 text-center">
-                    <h6>� 2023 OrientoIO. Tutti i diritti riservati.</h6>
+                    <h6>&agrave; 2023 OrientoIO. Tutti i diritti riservati.</h6>
                 </div>
             </div>
         </div>

@@ -372,6 +372,8 @@ RecensioneCorso rc = s.getRecensioneCorso();
                       $("#selected_rating").val(response.qualitaInsegnamento);
                       $("#sbocchiLavorativi").val(response.sbocchiLavorativi);
                       $("#opportunita").val(response.opportunitaOfferte);
+
+                      location.reload();
             	  }else{
             		  alert("Errore nella ricezione della risposta");
             	  }

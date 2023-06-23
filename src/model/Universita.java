@@ -60,6 +60,15 @@ public class Universita {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Universita [corsiDiLaurea=" + corsiDiLaurea + ", citta=" + citta + ", nome=" + nome
+				+ ", linkBorsaDiStudio=" + linkBorsaDiStudio + ", linkUniversita=" + linkUniversita + "]";
+	}
+	
+	
+
+
 
 	
 	
