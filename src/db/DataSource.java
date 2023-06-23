@@ -9,8 +9,8 @@ public class DataSource {
     
     // nome del database
     private String dbName = "tw_stud";
-    private static String userName = "A0975044";
-    private static String password = "BolzanoWeierstrass12";
+    private static String userName = "";
+    private static String password = "";
 
     
     

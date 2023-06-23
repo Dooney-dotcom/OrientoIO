@@ -1,7 +1,12 @@
 package model;
 
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,6 +59,27 @@ public class DatabaseMock {
 		
 		this.infoCitta = new ArrayList<>();
 		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		
+		try {
+			System.out.println("Username: ");
+			String username = reader.readLine();
+			System.out.println("Password: ");
+			String password = reader.readLine();
+			
+			DataSource.setUserName(username);
+			DataSource.setPassword(password);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(1);
+			}
+		}
 		
 		/*
 		 * Get delle Citta da DB
