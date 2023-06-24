@@ -170,6 +170,11 @@ public class ServletRegistrazione extends HttpServlet {
 							studenti.put(username, s);
 							db.setStudenti(studenti);
 							a.setRuolo("studente");
+							
+							List<StudenteUniversitario> cit = c.getStudenti();
+							cit.add(s);
+							c.setStudenti(cit);
+
 						}else {
 							request.getSession().setAttribute("errore", "Server error.");
 							this.getServletContext().getRequestDispatcher("/registrazione.jsp").forward(request, response);

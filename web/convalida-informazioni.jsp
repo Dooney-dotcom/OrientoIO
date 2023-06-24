@@ -156,6 +156,21 @@
     				                                </div>
     				                            </div>
     				                        </div>
+    				                        <div class="row">
+    				                        	<div class="col-sm-12">
+    				                        		<div class="mb-3">
+    				                        			<label for="" class="form-label">Lista Luoghi Preferiti</label>
+    				                        			<%
+    				                        				List<LuogoPreferito> luoghi = i.getListaLuoghiPreferiti();
+    				                        				for(LuogoPreferito l: luoghi){
+    				                        					%>
+    				                        						<p class="text-justify"><%=l.getNomeLuogo()%></p>
+    				                        					<%
+    				                        				}
+    				                        			%>
+     				                        		</div>
+    				                        	</div>
+    				                        </div>
     				                    </div>
     				                    
     				                    <div class="row">

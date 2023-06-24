@@ -33,7 +33,7 @@
 	if(request.getSession().getAttribute("info") != null){
 		info = (InformazioniCitta) request.getSession().getAttribute("info");
 	}else{
-		info = stud.getInfoCitta();
+		info = new InformazioniCitta();
 		request.getSession().setAttribute("info", info);
 	}
 %>
@@ -57,9 +57,7 @@
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     
-    <script src="./scripts/libs/jquery-1.12.3.min.js"></script>
-
-    <script src="./scripts/info-citta.js" defer></script>
+    <script src="./scripts/jquery-1.12.3.min.js"></script>
 </head>
 
 <body>
@@ -126,14 +124,84 @@
             <div class="col-md-5 col-sm-12 mt-2">
             	<div class="form-outline mb-4">
 		            <label class="form-check-label" for="abitazione">Seleziona la tua tipologia di abitazione:</label> </br>
-		                   <select class="form-select" aria-label="Default select example" id="abitazione" name="abitazione">
-		                       <option value="" disabled selected>Seleziona un'opzione...</option>
-		                       <option value="Singola">Singola</option>
-		                       <option value="Doppia">Doppia</option>
-		                       <option value="Tripla">Tripla</option>
-		                       <option value="Monolocale">Monolocale</option>
-		                       <option value="Bilocale">Bilocale</option>
-                    	  </select>
+		            <%
+                    	if(info != null){
+                    		if(info.getStatoConvalida() == StatoConvalida.ACCETTATA){
+                    			if(info.getTipoAbitazione().equals("Singola")){
+                    				%>
+                        			<select class="form-select" aria-label="Default select example" id="abitazione" name="abitazione">
+					                       <option value="" disabled selected>Seleziona un'opzione...</option>
+					                       <option value="Singola" selected>Singola</option>
+					                       <option value="Doppia">Doppia</option>
+					                       <option value="Tripla">Tripla</option>
+					                       <option value="Monolocale">Monolocale</option>
+					                       <option value="Bilocale">Bilocale</option>
+			                    	 </select>
+                        			<%	
+                    			}
+								if(info.getTipoAbitazione().equals("Doppia")){
+									%>
+                        			<select class="form-select" aria-label="Default select example" id="abitazione" name="abitazione">
+					                       <option value="" disabled selected>Seleziona un'opzione...</option>
+					                       <option value="Singola">Singola</option>
+					                       <option value="Doppia" selected>Doppia</option>
+					                       <option value="Tripla">Tripla</option>
+					                       <option value="Monolocale">Monolocale</option>
+					                       <option value="Bilocale">Bilocale</option>
+			                    	 </select>
+                        		<%                				
+								}
+								if(info.getTipoAbitazione().equals("Tripla")){
+									%>
+                        			<select class="form-select" aria-label="Default select example" id="abitazione" name="abitazione">
+					                       <option value="" disabled selected>Seleziona un'opzione...</option>
+					                       <option value="Singola">Singola</option>
+					                       <option value="Doppia">Doppia</option>
+					                       <option value="Tripla" selected>Tripla</option>
+					                       <option value="Monolocale">Monolocale</option>
+					                       <option value="Bilocale">Bilocale</option>
+			                    	 </select>
+                        		<%
+								}
+								if(info.getTipoAbitazione().equals("Monolocale")){
+									%>
+                        			<select class="form-select" aria-label="Default select example" id="abitazione" name="abitazione">
+					                       <option value="" disabled selected>Seleziona un'opzione...</option>
+					                       <option value="Singola">Singola</option>
+					                       <option value="Doppia">Doppia</option>
+					                       <option value="Tripla">Tripla</option>
+					                       <option value="Monolocale" selected>Monolocale</option>
+					                       <option value="Bilocale">Bilocale</option>
+			                    	 </select>
+                        		<%
+								}
+								if(info.getTipoAbitazione().equals("Bilocale")){
+									%>
+                        			<select class="form-select" aria-label="Default select example" id="abitazione" name="abitazione">
+					                       <option value="" disabled selected>Seleziona un'opzione...</option>
+					                       <option value="Singola">Singola</option>
+					                       <option value="Doppia">Doppia</option>
+					                       <option value="Tripla">Tripla</option>
+					                       <option value="Monolocale">Monolocale</option>
+					                       <option value="Bilocale" selected>Bilocale</option>
+			                    	 </select>
+                        		<%
+								} 
+                        	}else{
+                        		%>
+                    				<select class="form-select" aria-label="Default select example" id="abitazione" name="abitazione">
+					                       <option value="" disabled selected>Seleziona un'opzione...</option>
+					                       <option value="Singola">Singola</option>
+					                       <option value="Doppia">Doppia</option>
+					                       <option value="Tripla">Tripla</option>
+					                       <option value="Monolocale">Monolocale</option>
+					                       <option value="Bilocale">Bilocale</option>
+			                    	 </select>
+                    			<%
+                        	}
+                    	}
+          
+                    %>
                 </div>
             </div>
 
@@ -141,7 +209,20 @@
             <div class="col-md-5 col-sm-12 mt-2 text-end justify-content-end">
                 <div class="form-outline mb-4">
                     <label class="form-check-label" for="affitto">Inserisci il costo del tuo affitto (&euro;):</label> </br>
-                    	<input type="text" class="form-control" name="affitto" id="affitto" aria-describedby="helpId" placeholder="es. 500">
+                    <%
+                    	if(info != null){
+                    		if(info.getStatoConvalida() == StatoConvalida.ACCETTATA){
+                        		%>
+                        			<input type="text" class="form-control" name="affitto" id="affitto" aria-describedby="helpId" value="<%=info.getAffitto() %>">
+                        		<% 
+                        	}else{
+                        		%>
+                    				<input type="text" class="form-control" name="affitto" id="affitto" aria-describedby="helpId" placeholder="es. 500">
+                    			<%
+                        	}
+                    	}
+          
+                    %>
                 </div>
             </div>
 
@@ -158,32 +239,60 @@
                 
                 <span class="field-label-info"></span>
 
-                <input type="hidden" id="selected_rating_mezzi" name="selected_rating_mezzi" value="" required="required">
+                <input type="hidden" id="selected_rating" name="mezzi" value="" required="required">
                 
                 <h2 class="bold rating-header">
 
-                <span class="selected-rating-mezzi">0</span> <small> / 5</small></h2>
+                <span class="selected-rating">0</span> <small> / 5</small></h2>
 
-                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="1" id="rating-star-mezzi1">
+                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="2" id="rating-star-mezzi2">
+                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="2" id="rating-star-2">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="3" id="rating-star-mezzi3">
+                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="3" id="rating-star-3">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="4" id="rating-star-mezzi4">
+                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="4" id="rating-star-4">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
 
-                <button type="button" class="btnrating-mezzi btn btn-default btn-lg" data-attr="5" id="rating-star-mezzi5">
+                <button type="button" class="btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5">
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
         </div>
+
+        <script>
+            jQuery(document).ready(function($){
+
+                $(".btnrating").on('click',(function(e) {
+                
+                var previous_value = $("#selected_rating").val();
+                
+                var selected_value = $(this).attr("data-attr");
+                $("#selected_rating").val(selected_value);
+                
+                $(".selected-rating").empty();
+                $(".selected-rating").html(selected_value);
+                
+                for (i = 1; i <= selected_value; ++i) {
+                $("#rating-star-"+i).toggleClass('star-selected');
+                $("#rating-star-"+i).toggleClass('star-default');
+                }
+                
+                for (ix = 1; ix <= previous_value; ++ix) {
+                $("#rating-star-"+ix).toggleClass('star-selected');
+                $("#rating-star-"+ix).toggleClass('star-default');
+                }
+                
+                }));
+                
+            });
+        </script>
 
             <!-- livello culturale -->
             <div class="col-md-5 col-sm-12 text-end justify-content-end">
@@ -191,32 +300,60 @@
                     
                     <span class="field-label-info"></span>
 
-                    <input type="hidden" id="selected_rating_cultura" name="selected_rating_cultura" value="" required="required">
+                    <input type="hidden" id="selected_rating2" name="cultura" value="" required="required">
                     
                     <h2 class="bold rating-header">
 
-                    <span class="selected-rating-cultura">0</span> <small> / 5</small> </h2>
+                    <span class="selected-rating2">0</span> <small> / 5</small> </h2>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="1" id="rating-star-cultura-1">
+                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="1" id="rating-star-2-1">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="2" id="rating-star-cultura-2">
+                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="2" id="rating-star-2-2">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="3" id="rating-star-cultura-3">
+                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="3" id="rating-star-2-3">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="4" id="rating-star-cultura-4">
+                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="4" id="rating-star-2-4">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
 
-                    <button type="button" class="btn btn-default btn-lg btnrating-cultura" data-attr="5" id="rating-star-cultura-5">
+                    <button type="button" class="btn btn-default btn-lg btnrating2" data-attr="5" id="rating-star-2-5">
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </button>
             </div>
+
+            <script>
+                jQuery(document).ready(function($){
+
+                    $(".btnrating2").on('click',(function(e) {
+                    
+                    var previous_value2 = $("#selected_rating2").val();
+                    
+                    var selected_value2 = $(this).attr("data-attr");
+                    $("#selected_rating2").val(selected_value2);
+                    
+                    $(".selected-rating2").empty();
+                    $(".selected-rating2").html(selected_value2);
+                    
+                    for (i = 1; i <= selected_value2; ++i) {
+                    $("#rating-star-2-"+i).toggleClass('star-selected');
+                    $("#rating-star-2-"+i).toggleClass('star-default');
+                    }
+                    
+                    for (ix = 1; ix <= previous_value2; ++ix) {
+                    $("#rating-star-2-"+ix).toggleClass('star-selected');
+                    $("#rating-star-2-"+ix).toggleClass('star-default');
+                    }
+                    
+                    }));
+                    
+                });
+            </script>
 
             <div class="col-md-1 col-sm-12"></div>
         </div>
@@ -228,7 +365,20 @@
             <div class="col-sm-10 text-start">
                 <div class="form-outline mb-4">
                     <label class="form-check-label" for="recensione">Inserisci la tua recensione:</label> </br>
-                    <textarea class="form-control" id="recensione" name="recensione" rows="3"></textarea>
+                    <%
+                    	if(info != null){
+                    		if(info.getStatoConvalida() == StatoConvalida.ACCETTATA){
+                        		%>
+                        			 <textarea class="form-control" id="recensione" name="recensione" rows="3"><%=info.getRecensioneCitta() %></textarea>
+                        		<% 
+                        	}else{
+                        		%>
+                    				 <textarea class="form-control" id="recensione" name="recensione" rows="3"></textarea>
+                    			<%
+                        	}
+                    	}
+          
+                    %>
                 </div>
             </div>
 

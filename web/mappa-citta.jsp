@@ -113,7 +113,7 @@
             					float bilocale=0;
             					int c_bilocale=0;
             					for(StudenteUniversitario stud: studenti){
-            						if(stud.getInfoCitta() != null){
+            						if(stud.getInfoCitta() != null && stud.getInfoCitta().getStatoConvalida() != StatoConvalida.IN_ATTESA){
             							if(stud.getInfoCitta().getTipoAbitazione().equals("Singola")){
                 							c_singola++;
                 							singola+=stud.getInfoCitta().getAffitto();
@@ -174,7 +174,7 @@
 								int count=0;
 								
 								for(StudenteUniversitario stud: studenti){
-									if(stud.getInfoCitta() != null){
+									if(stud.getInfoCitta() != null && stud.getInfoCitta().getStatoConvalida() != StatoConvalida.IN_ATTESA){
 										mezzi+=stud.getInfoCitta().getValutazioneMezzi();
 										cultura+=stud.getInfoCitta().getLivelloCulturale();
 										count++;	
@@ -191,7 +191,7 @@
 								
 							
 							%>
-				            <div class="row ps-4 py-3">
+				            <div class="row ps-4 py-3">	        
 				               <div class="ps-2">
 			                        <span><%=val_mezzi%></span><small>/5</small>
 			                    </div>
@@ -209,13 +209,61 @@
 			                    </div>
 				            </div>
 				            <hr>
-
+				            
+				            <div class="row ps-2">
+              					<div class="col-sm-12">
+                					<h4>Luoghi maggiormente frequentati</h4>
+                					Ecco i 5 luoghi maggiormente votati e frequentati dai nostri studenti.
+              					</div>
+            				</div>
+				            <div class="row ps-4 py-3">
+				       			<div class="col-sm-12">
+				       				<div class="ps-2">
+				       				<%
+				       					Map<String, Integer> luoghi = new HashMap<>();
+				       					for(StudenteUniversitario stud: studenti){
+					            			if(stud.getInfoCitta() != null && stud.getInfoCitta().getStatoConvalida() != StatoConvalida.IN_ATTESA){
+					            				for(LuogoPreferito l: stud.getInfoCitta().getListaLuoghiPreferiti()){
+					            					if(luoghi.containsKey(l.getNomeLuogo())){
+					            						luoghi.put(l.getNomeLuogo(), luoghi.get(l.getNomeLuogo())+1);
+					            					}else{
+					            						luoghi.put(l.getNomeLuogo(), 1);
+					            					}
+					            				}
+					            			}
+					            		}
+				       					
+				       				
+				       					if(luoghi.size() <= 5){
+				       						for(String n: luoghi.keySet()){
+					       						%>
+					       							<p class="text-justify"><strong><%=n %></strong></p>
+					       						<%
+					       					}
+				       					}else{
+				       						int i=0;
+				       						for(String n: luoghi.keySet()){
+					       						if(i < 5){
+					       							%>
+					       							<p class="text-justify"><strong><%=n %></strong></p>
+					       							<%
+					       							i++;
+					       						}
+					       					}
+				       					}
+				       					
+				       				%>
+				       				</div>
+				       			</div>
+				            </div>
+				            
+							<hr>
 				            <h4>Recensioni</h4>
 				            Ecco le recensioni degli Studenti Universitari sulle citt&agrave; in cui vivono.
 							<%
 								Map<String, String> recensioni = new HashMap<>();
 				            	for(StudenteUniversitario stud: studenti){
-				            		if(stud.getInfoCitta() != null){
+				            		if(stud.getInfoCitta() != null && stud.getInfoCitta().getStatoConvalida() != StatoConvalida.IN_ATTESA){
 				            			recensioni.put(stud.getUsername(), stud.getInfoCitta().getRecensioneCitta());
 				            		}
 				            	}
