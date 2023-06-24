@@ -394,7 +394,9 @@ if(ruolo.equals("amministratore")) {
 					                                      		<input type="text" name="nomeEsame" value="<%= e.getNome()%>" hidden>
 					                                      		<input type="text" name="link" value="<%= e.getLinkEsame()%>" hidden>
 					                                      		<input type="text" name="usernameStudente" value="<%= re.getStudente().getUsername()%>" hidden>
-					                                      		<button type="submit" class="btn btn-success">Segnala recensione</button>
+																<% if(!re.getStudente().getUsername().equals(username)) {%>
+																<button type="submit" class="btn btn-success">Segnala recensione</button>
+																<%} %>
 					                                      	</form> 
 					                                      </div>
 					                                      
@@ -475,7 +477,11 @@ if(ruolo.equals("amministratore")) {
                                       		<input type="text" name="nomeCorso" value="<%= cc.getNome()%>" hidden="true">
                                       		<input type="text" name="nomeUniversita" value="<%= cc.getUniversita().getNome()%>" hidden="true">
                                       		<input type="text" name="usernameStudente" value="<%= rv.getStudente().getUsername()%>" hidden="true">
-                                      		<button type="submit" class="btn btn-success">Segnala recensione</button>
+                                      		<% if(!rv.getStudente().getUsername().equals(username)) {%>
+											<button type="submit" class="btn btn-success">Segnala recensione</button>
+											<%} %>
+                                      		
+                                      		
                                       	</form> 
                                       </div>
                                       

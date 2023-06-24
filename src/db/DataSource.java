@@ -11,8 +11,6 @@ public class DataSource {
     private String dbName = "tw_stud";
     private static String userName = "";
     private static String password = "";
-
-    
     
     public final static int DB2 = 0;
     public final static int HSQLDB = 1;
