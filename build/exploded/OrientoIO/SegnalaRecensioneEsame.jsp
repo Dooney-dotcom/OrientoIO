@@ -24,9 +24,6 @@ String username = (String) session.getAttribute("username");
 if(ruolo.equals("amministratore")) {
 	response.sendRedirect("./HomeAmministratore.jsp");
 	return;
-} else if(ruolo.equals("studente") && ((StudenteUniversitario) session.getAttribute("user")).getRestrizione().getTipoRestrizione().equals(TipoRestrizione.BAN)){ 
-	response.sendRedirect("./login.jsp");
-	return;
 }else{
 
 	Utente utente = (Utente) session.getAttribute("user");

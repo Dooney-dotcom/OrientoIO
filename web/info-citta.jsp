@@ -205,7 +205,7 @@
                 </div>
             </div>
 
-             <!-- costo affitto -->
+            <!-- costo affitto -->
             <div class="col-md-5 col-sm-12 mt-2 text-end justify-content-end">
                 <div class="form-outline mb-4">
                     <label class="form-check-label" for="affitto">Inserisci il costo del tuo affitto (&euro;):</label> </br>

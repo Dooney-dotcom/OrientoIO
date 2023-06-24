@@ -60,8 +60,8 @@ public class DatabaseMock {
 		this.infoCitta = new ArrayList<>();
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		
-		try {
+		/*
+		 * try {
 			System.out.println("Username: ");
 			String username = reader.readLine();
 			System.out.println("Password: ");
@@ -80,6 +80,8 @@ public class DatabaseMock {
 				System.exit(1);
 			}
 		}
+		 */
+		
 		
 		/*
 		 * Get delle Citta da DB
