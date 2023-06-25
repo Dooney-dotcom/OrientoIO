@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.*;
 
 public class ServletConvalida extends HttpServlet{
@@ -52,6 +54,7 @@ public class ServletConvalida extends HttpServlet{
 		db.setInfoCitta(info);
 		db.setStudenti(studenti);
 		this.getServletContext().setAttribute("db", db);
-		this.getServletContext().getRequestDispatcher("/convalida-informazioni.jsp").forward(request, response);
+		Gson g = new Gson();
+		response.getWriter().write(g.toJson(""));
 	}
 }

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.*;
 
 public class ServletGestioneUtenti extends HttpServlet{
@@ -46,15 +48,28 @@ private static final long serialVersionUID = 1L;
 				restr.setTipoRestrizione(TipoRestrizione.SCRITTURA);
 			}
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			restr.setScadenza(LocalDateTime.of(LocalDate.parse(d, formatter), LocalTime.now()));
-			s.setRestrizione(restr);
+			if(LocalDate.parse(d, formatter).getYear() >= LocalDate.now().getYear()) {
+				if(LocalDate.parse(d, formatter).getMonthValue() >= LocalDate.now().getMonthValue()) {
+					if(LocalDate.parse(d, formatter).getDayOfMonth() >= LocalDate.now().getDayOfMonth()) {
+						restr.setScadenza(LocalDateTime.of(LocalDate.parse(d, formatter), LocalTime.now()));
+						s.setRestrizione(restr);
+					}else {
+						s.setRestrizione(null);
+					}
+				}else {
+					s.setRestrizione(null);
+				}
+			}else {
+				s.setRestrizione(null);
+			}	
 		}else //Caso Rimuovi
 			if(button.equals("rimuovi")) {
 				s.setRestrizione(null);
 			}
 		db.setStudenti(studenti);
 		this.getServletContext().setAttribute("db", db);
-		response.sendRedirect("/gestione-utenti.jsp");
+		Gson g = new Gson();
+		response.getWriter().write(g.toJson(""));
 	}
 	
 	@Override

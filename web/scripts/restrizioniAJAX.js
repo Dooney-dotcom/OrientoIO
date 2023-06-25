@@ -13,6 +13,8 @@ function callback(xhr){
 		if(xhr.status===200){
 			console.log("Restrizione modificata con successo...");
 			//OK...
+			alert("Restrizione modificata con successo!");
+			location.reload();
 		}
 	}
 }//callback
@@ -35,7 +37,7 @@ function sendJson(uri, xhr){
 
 function modificaRestrizioni(uri){
 	var xhr=myGetXmlHttpRequest();
-	console.log("Inizializzazzione modifica...");
+	console.log("Inizializzazzione modifica restrizioni...");
 	if(xhr)
 		sendJson(uri, xhr);
 	else 

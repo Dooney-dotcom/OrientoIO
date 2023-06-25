@@ -11,8 +11,10 @@ function callback(xhr){
 		
 		//verifica della risposta del server
 		if(xhr.status===200){
-			console.log("Restrizione modificata con successo...");
+			console.log("Scelta di convalida effettuta con successo...");
 			//OK...
+			alert("Scelta di convalida effettuta con successo!");
+			location.reload();
 		}
 	}
 }//callback
