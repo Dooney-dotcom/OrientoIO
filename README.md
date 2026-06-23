@@ -80,6 +80,7 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 - **[Apache Ant](https://ant.apache.org/)** - For the build system.
 - **[MySQL](https://www.mysql.com/)** - For the database backend.
 
-## Contact
-
-Questions, suggestions, or collaboration opportunities? Feel free to open an issue on the [GitHub repository](https://github.com/Dooney-dotcom/OrientoIO).
+## Contributors
+- Daniele Buono
+- Alessandro Costa
+- Federico Micello
