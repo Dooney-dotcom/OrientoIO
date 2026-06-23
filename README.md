@@ -80,7 +80,7 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 - **[Apache Ant](https://ant.apache.org/)** - For the build system.
 - **[MySQL](https://www.mysql.com/)** - For the database backend.
 
-## Contributors
-- Daniele Buono
+## Co-Authors
+- [Daniele Buono](https://github.com/Dooney-dotcom)
 - Alessandro Costa
-- Federico Micello
+- [Federico Micello](https://github.com/Fedemiq)
